@@ -1,0 +1,1138 @@
+
+### API keys (7 ops)
+- GET /api-keys | List all API keys | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /api-keys | Create an API key | auth | state=Stable | perms=
+    body application/json: #/components/schemas/ApiKeyCreateDto
+    -> 201:  content=['application/json']
+- GET /api-keys/me | Retrieve the current API key | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- DELETE /api-keys/{id} | Delete an API key | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /api-keys/{id} | Retrieve an API key | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /api-keys/{id} | Update an API key | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/ApiKeyUpdateDto
+    -> 200:  content=['application/json']
+- POST /api-keys/{id}/rotate | Rotate an API key | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 201:  content=['application/json']
+
+### Activities (4 ops)
+- GET /activities | List all activities | auth | state=Stable | perms=
+    param query: albumId (string) req=True :: Album ID
+    param query: assetId (string) req=False :: Asset ID (if activity is for an asset)
+    param query: level (?) req=False :: 
+    param query: type (?) req=False :: 
+    param query: userId (string) req=False :: Filter by user ID
+    -> 200:  content=['application/json']
+- POST /activities | Create an activity | auth | state=Stable | perms=
+    body application/json: #/components/schemas/ActivityCreateDto
+    -> 201:  content=['application/json']
+- GET /activities/statistics | Retrieve activity statistics | auth | state=Stable | perms=
+    param query: albumId (string) req=True :: Album ID
+    param query: assetId (string) req=False :: Asset ID (if activity is for an asset)
+    -> 200:  content=['application/json']
+- DELETE /activities/{id} | Delete an activity | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+
+### Albums (13 ops)
+- GET /albums | List all albums | auth | state=Stable | perms=
+    param query: assetId (string) req=False :: Filter albums containing this asset ID (ignores other parameters)
+    param query: id (string) req=False :: Album ID
+    param query: isOwned (boolean) req=False :: Filter by ownership: true = only owned, false = only shared-with-me, undefined = no filter
+    param query: isShared (boolean) req=False :: Filter by shared status: true = only shared, false = not shared, undefined = no filter
+    param query: name (string) req=False :: Album name (exact match)
+    -> 200:  content=['application/json']
+- POST /albums | Create an album | auth | state=Stable | perms=
+    body application/json: #/components/schemas/CreateAlbumDto
+    -> 201:  content=['application/json']
+- PUT /albums/assets | Add assets to albums | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AlbumsAddAssetsDto
+    -> 200:  content=['application/json']
+- GET /albums/statistics | Retrieve album statistics | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- DELETE /albums/{id} | Delete an album | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /albums/{id} | Retrieve an album | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/json']
+- PATCH /albums/{id} | Update an album | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/UpdateAlbumDto
+    -> 200:  content=['application/json']
+- DELETE /albums/{id}/assets | Remove assets from an album | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+- PUT /albums/{id}/assets | Add assets to an album | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+- GET /albums/{id}/map-markers | Retrieve album map markers | auth | state= | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/json']
+- DELETE /albums/{id}/user/{userId} | Remove user from album | auth | state=Stable | perms=
+    param path: id (string) req=True :: Album ID
+    param path: userId (string) req=True :: Album user ID, or "me" to reference the current user.
+    -> 204:  content=[]
+- PUT /albums/{id}/user/{userId} | Update user role | auth | state=Stable | perms=
+    param path: id (string) req=True :: Album ID
+    param path: userId (string) req=True :: Album user ID, or "me" to reference the current user.
+    body application/json: #/components/schemas/UpdateAlbumUserDto
+    -> 204:  content=[]
+- PUT /albums/{id}/users | Share album with users | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AddUsersDto
+    -> 200:  content=['application/json']
+
+### Asset files (4 ops)
+- GET /asset-files | Search asset files | auth | state=Alpha | perms=
+    param query: assetId (string) req=True :: Asset ID to filter files by
+    param query: isEdited (boolean) req=False :: The file was generated from an edit
+    param query: isProgressive (boolean) req=False :: The file is a progressively encoded JPEG
+    param query: isTransparent (boolean) req=False :: The file is transparent
+    param query: type (?) req=False :: Filter by type of file
+    -> 200:  content=['application/json']
+- DELETE /asset-files/{id} | Delete an asset file | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /asset-files/{id} | Retrieve an asset file | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /asset-files/{id}/download | Download an asset file | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/octet-stream']
+
+### Assets (26 ops)
+- DELETE /assets | Delete assets | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AssetBulkDeleteDto
+    -> 204:  content=[]
+- POST /assets | Upload asset | auth | state=Stable | perms=
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    param header: x-immich-checksum (string) req=False :: sha1 checksum that can be used for duplicate detection before the file is uploaded
+    body multipart/form-data: #/components/schemas/AssetMediaCreateDto
+    -> 200: Asset is a duplicate content=['application/json']
+    -> 201: Asset uploaded successfully content=['application/json']
+- PUT /assets | Update assets | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AssetBulkUpdateDto
+    -> 204:  content=[]
+- POST /assets/bulk-upload-check | Check bulk upload | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AssetBulkUploadCheckDto
+    -> 200:  content=['application/json']
+- PUT /assets/copy | Copy asset | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AssetCopyDto
+    -> 204:  content=[]
+- POST /assets/jobs | Run an asset job | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AssetJobsDto
+    -> 204:  content=[]
+- DELETE /assets/metadata | Delete asset metadata | auth | state=Beta | perms=
+    body application/json: #/components/schemas/AssetMetadataBulkDeleteDto
+    -> 204:  content=[]
+- PUT /assets/metadata | Upsert asset metadata | auth | state=Beta | perms=
+    body application/json: #/components/schemas/AssetMetadataBulkUpsertDto
+    -> 200:  content=['application/json']
+- GET /assets/statistics | Get asset statistics | auth | state=Stable | perms=
+    param query: isFavorite (boolean) req=False :: Filter by favorite status
+    param query: isTrashed (boolean) req=False :: Filter by trash status
+    param query: visibility (?) req=False :: 
+    -> 200:  content=['application/json']
+- GET /assets/{id} | Retrieve an asset | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/json']
+- PUT /assets/{id} | Update an asset | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/UpdateAssetDto
+    -> 200:  content=['application/json']
+- DELETE /assets/{id}/edits | Remove edits from an existing asset | auth | state=Beta | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /assets/{id}/edits | Retrieve edits for an existing asset | auth | state=Beta | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /assets/{id}/edits | Apply edits to an existing asset | auth | state=Beta | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AssetEditsCreateDto
+    -> 200:  content=['application/json']
+- GET /assets/{id}/metadata | Get asset metadata | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /assets/{id}/metadata | Update asset metadata | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AssetMetadataUpsertDto
+    -> 200:  content=['application/json']
+- DELETE /assets/{id}/metadata/{key} | Delete asset metadata by key | auth | state=Stable | perms=
+    param path: id (string) req=True :: Asset ID
+    param path: key (string) req=True :: Metadata key
+    -> 204:  content=[]
+- GET /assets/{id}/metadata/{key} | Retrieve asset metadata by key | auth | state=Stable | perms=
+    param path: id (string) req=True :: Asset ID
+    param path: key (string) req=True :: Metadata key
+    -> 200:  content=['application/json']
+- GET /assets/{id}/ocr | Retrieve asset OCR data | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /assets/{id}/original | Download original asset | auth | state=Stable | perms=
+    param query: edited (boolean) req=False :: Return edited asset if available
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/octet-stream']
+- GET /assets/{id}/thumbnail | View asset thumbnail | auth | state=Stable | perms=
+    param query: edited (boolean) req=False :: Return edited asset if available
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: size (?) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/octet-stream']
+- GET /assets/{id}/video/playback | Play asset video | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/octet-stream']
+- GET /assets/{id}/video/stream/main.m3u8 | Get HLS main playlist | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/vnd.apple.mpegurl']
+- DELETE /assets/{id}/video/stream/{sessionId} | End HLS streaming session | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param path: sessionId (string) req=True :: 
+    param query: slug (string) req=False :: 
+    -> 204:  content=[]
+- GET /assets/{id}/video/stream/{sessionId}/{variantIndex}/playlist.m3u8 | Get HLS media playlist | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param path: sessionId (string) req=True :: 
+    param query: slug (string) req=False :: 
+    param path: variantIndex (integer) req=True :: 
+    param header: x-immich-hls-pos (number) req=False :: 
+    -> 200:  content=['application/vnd.apple.mpegurl']
+- GET /assets/{id}/video/stream/{sessionId}/{variantIndex}/{filename} | Get HLS segment or init file | auth | state=Alpha | perms=
+    param path: filename (string) req=True :: 
+    param path: id (string) req=True :: 
+    param query: key (string) req=False :: 
+    param path: sessionId (string) req=True :: 
+    param query: slug (string) req=False :: 
+    param path: variantIndex (integer) req=True :: 
+    param header: x-immich-hls-msn (integer) req=False :: 
+    -> 200:  content=['application/octet-stream']
+
+### Authentication (17 ops)
+- POST /auth/admin-sign-up | Register admin | auth(default) | state=Stable | perms=
+    body application/json: #/components/schemas/SignUpDto
+    -> 201:  content=['application/json']
+- POST /auth/change-password | Change password | auth | state=Stable | perms=
+    body application/json: #/components/schemas/ChangePasswordDto
+    -> 200:  content=['application/json']
+- POST /auth/login | Login | auth(default) | state=Stable | perms=
+    body application/json: #/components/schemas/LoginCredentialDto
+    -> 201:  content=['application/json']
+- POST /auth/logout | Logout | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- DELETE /auth/pin-code | Reset pin code | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PinCodeResetDto
+    -> 204:  content=[]
+- POST /auth/pin-code | Setup pin code | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PinCodeSetupDto
+    -> 204:  content=[]
+- PUT /auth/pin-code | Change pin code | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PinCodeChangeDto
+    -> 204:  content=[]
+- POST /auth/session/lock | Lock auth session | auth | state=Stable | perms=
+    -> 204:  content=[]
+- POST /auth/session/unlock | Unlock auth session | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SessionUnlockDto
+    -> 204:  content=[]
+- GET /auth/status | Retrieve auth status | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /auth/validateToken | Validate access token | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /oauth/authorize | Start OAuth | auth(default) | state=Stable | perms=
+    body application/json: #/components/schemas/OAuthConfigDto
+    -> 201:  content=['application/json']
+- POST /oauth/backchannel-logout | Backchannel OAuth logout | auth(default) | state= | perms=
+    body application/x-www-form-urlencoded: #/components/schemas/OAuthBackchannelLogoutDto
+    -> 200:  content=[]
+- POST /oauth/callback | Finish OAuth | auth(default) | state=Stable | perms=
+    body application/json: #/components/schemas/OAuthCallbackDto
+    -> 201:  content=['application/json']
+- POST /oauth/link | Link OAuth account | auth | state=Stable | perms=
+    body application/json: #/components/schemas/OAuthCallbackDto
+    -> 200:  content=['application/json']
+- GET /oauth/mobile-redirect | Redirect OAuth to mobile | auth(default) | state=Stable | perms=
+    -> 200:  content=[]
+- POST /oauth/unlink | Unlink OAuth account | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+
+### Authentication (admin) (1 ops)
+- POST /admin/auth/unlink-all | Unlink all OAuth accounts | auth | state=Stable | perms=
+    -> 204:  content=[]
+
+### Cluster groups (8 ops)
+- GET /cluster-groups/requests | Retrieve cluster group requests | auth | state= | perms=
+    -> 200:  content=['application/json']
+- DELETE /cluster-groups/requests/{id} | Decline a cluster group request | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- POST /cluster-groups/requests/{id}/accept | Accept a cluster group request | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- POST /cluster-groups/{id}/leave | Leave a cluster group | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- POST /cluster-groups/{id}/regenerate-people | Regenerate people of users in cluster group | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /cluster-groups/{id}/requests | Retrieve the requests sent by a cluster group | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /cluster-groups/{id}/requests | Create a cluster group request | auth | state= | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/ClusterGroupRequestCreateDto
+    -> 200:  content=['application/json']
+- GET /cluster-groups/{id}/users | Retrieve the users of a cluster group | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+
+### Config (admin) (3 ops)
+- GET /admin/config | Get the admin configuration | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- PUT /admin/config | Update the system configuration | auth | state=Alpha | perms=
+    body application/json: #/components/schemas/AdminConfigDto
+    -> 200:  content=['application/json']
+- GET /admin/config/defaults | Get the system configuration defaults | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+
+### Config (public) (2 ops)
+- GET /public/config | Get the public configuration | auth(default) | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- GET /public/config/defaults | Get the public configuration defaults | auth(default) | state=Alpha | perms=
+    -> 200:  content=['application/json']
+
+### Config (user) (2 ops)
+- GET /config | Get the configuration with user visibility | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- GET /config/defaults | Get the default configuration with user visibility | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+
+### Database Backups (admin) (5 ops)
+- DELETE /admin/database-backups | Delete database backup | auth | state=Alpha | perms=
+    body application/json: #/components/schemas/DatabaseBackupDeleteDto
+    -> 200:  content=[]
+- GET /admin/database-backups | List database backups | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- POST /admin/database-backups/start-restore | Start database backup restore flow | auth(default) | state=Alpha | perms=
+    -> 201:  content=[]
+- POST /admin/database-backups/upload | Upload database backup | auth | state=Alpha | perms=
+    body multipart/form-data: #/components/schemas/DatabaseBackupUploadDto
+    -> 201:  content=[]
+- GET /admin/database-backups/{filename} | Download database backup | auth | state=Alpha | perms=
+    param path: filename (string) req=True :: 
+    -> 200:  content=['application/octet-stream']
+
+### Download (2 ops)
+- POST /download/archive | Download asset archive | auth | state=Stable | perms=
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    body application/json: #/components/schemas/DownloadArchiveDto
+    -> 200:  content=['application/octet-stream']
+- POST /download/info | Retrieve download information | auth | state=Stable | perms=
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    body application/json: #/components/schemas/DownloadInfoDto
+    -> 201:  content=['application/json']
+
+### Duplicates (4 ops)
+- DELETE /duplicates | Delete duplicates | auth | state=Stable | perms=
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 204:  content=[]
+- GET /duplicates | Retrieve duplicates | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /duplicates/resolve | Resolve duplicate groups | auth | state=Alpha | perms=
+    body application/json: #/components/schemas/DuplicateResolveDto
+    -> 200:  content=['application/json']
+- DELETE /duplicates/{id} | Dismiss a duplicate group | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+
+### Faces (4 ops)
+- GET /faces | Retrieve faces for asset | auth | state=Stable | perms=
+    param query: id (string) req=True :: Face ID
+    -> 200:  content=['application/json']
+- POST /faces | Create a face | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AssetFaceCreateDto
+    -> 201:  content=[]
+- DELETE /faces/{id} | Delete a face | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AssetFaceDeleteDto
+    -> 204:  content=[]
+- PUT /faces/{id} | Re-assign a face to another person | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/FaceDto
+    -> 200:  content=['application/json']
+
+### Jobs (3 ops)
+- GET /jobs [DEPRECATED] | Retrieve queue counts and status | auth | state=Deprecated | perms=
+    -> 200:  content=['application/json']
+- POST /jobs | Create a manual job | auth | state=Stable | perms=
+    body application/json: #/components/schemas/JobCreateDto
+    -> 204:  content=[]
+- PUT /jobs/{name} [DEPRECATED] | Run jobs | auth | state=Deprecated | perms=
+    param path: name (?) req=True :: 
+    body application/json: #/components/schemas/QueueCommandDto
+    -> 200:  content=['application/json']
+
+### Libraries (8 ops)
+- GET /libraries | Retrieve libraries | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /libraries | Create a library | auth | state=Stable | perms=
+    body application/json: #/components/schemas/CreateLibraryDto
+    -> 201:  content=['application/json']
+- DELETE /libraries/{id} | Delete a library | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /libraries/{id} | Retrieve a library | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /libraries/{id} | Update a library | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/UpdateLibraryDto
+    -> 200:  content=['application/json']
+- POST /libraries/{id}/scan | Scan a library | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /libraries/{id}/statistics | Retrieve library statistics | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- POST /libraries/{id}/validate | Validate library settings | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/ValidateLibraryDto
+    -> 200:  content=['application/json']
+
+### Maintenance (admin) (9 ops)
+- GET /admin/integrity/report | Get integrity report by type | auth | state=Alpha | perms=
+    param query: cursor (string) req=False :: Cursor for pagination
+    param query: limit (integer) req=False :: Number of items per page
+    param query: type (?) req=True :: 
+    -> 200:  content=['application/json']
+- DELETE /admin/integrity/report/{id} | Delete integrity report item | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=[]
+- GET /admin/integrity/report/{id}/file | Download flagged file | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/octet-stream']
+- GET /admin/integrity/report/{type}/csv | Export integrity report by type as CSV | auth | state=Alpha | perms=
+    param path: type (?) req=True :: 
+    -> 200:  content=['application/octet-stream']
+- GET /admin/integrity/summary | Get integrity report summary | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- POST /admin/maintenance | Set maintenance mode | auth | state=Alpha | perms=
+    body application/json: #/components/schemas/SetMaintenanceModeDto
+    -> 201:  content=[]
+- GET /admin/maintenance/detect-install | Detect existing install | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- POST /admin/maintenance/login | Log into maintenance mode | auth(default) | state=Alpha | perms=
+    body application/json: #/components/schemas/MaintenanceLoginDto
+    -> 201:  content=['application/json']
+- GET /admin/maintenance/status | Get maintenance mode status | auth(default) | state=Alpha | perms=
+    -> 200:  content=['application/json']
+
+### Map (2 ops)
+- GET /map/markers | Retrieve map markers | auth | state=Stable | perms=
+    param query: fileCreatedAfter (string) req=False :: Filter assets created after this date
+    param query: fileCreatedBefore (string) req=False :: Filter assets created before this date
+    param query: isArchived (boolean) req=False :: Filter by archived status
+    param query: isFavorite (boolean) req=False :: Filter by favorite status
+    param query: withPartners (boolean) req=False :: Include partner assets
+    param query: withSharedAlbums (boolean) req=False :: Include shared album assets
+    -> 200:  content=['application/json']
+- GET /map/reverse-geocode | Reverse geocode coordinates | auth | state=Stable | perms=
+    param query: lat (number) req=True :: Latitude (-90 to 90)
+    param query: lon (number) req=True :: Longitude (-180 to 180)
+    -> 200:  content=['application/json']
+
+### Memories (8 ops)
+- GET /memories | Retrieve memories | auth | state=Stable | perms=
+    param query: for (string) req=False :: Filter by date
+    param query: id (string) req=False :: Memory ID
+    param query: isSaved (boolean) req=False :: Filter by saved status
+    param query: isTrashed (boolean) req=False :: Include trashed memories
+    param query: isUpcoming (boolean) req=False :: Filter by memories that have not been shown yet
+    param query: order (?) req=False :: 
+    param query: page (integer) req=False :: Page number
+    param query: size (integer) req=False :: Number of memories to return
+    param query: type (?) req=False :: 
+    -> 200:  content=['application/json']
+- POST /memories | Create a memory | auth | state=Stable | perms=
+    body application/json: #/components/schemas/MemoryCreateDto
+    -> 201:  content=['application/json']
+- GET /memories/statistics | Retrieve memories statistics | auth | state=Stable | perms=
+    param query: for (string) req=False :: Filter by date
+    param query: id (string) req=False :: Memory ID
+    param query: isSaved (boolean) req=False :: Filter by saved status
+    param query: isTrashed (boolean) req=False :: Include trashed memories
+    param query: isUpcoming (boolean) req=False :: Filter by memories that have not been shown yet
+    param query: order (?) req=False :: 
+    param query: page (integer) req=False :: Page number
+    param query: size (integer) req=False :: Number of memories to return
+    param query: type (?) req=False :: 
+    -> 200:  content=['application/json']
+- DELETE /memories/{id} | Delete a memory | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /memories/{id} | Retrieve a memory | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /memories/{id} | Update a memory | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/MemoryUpdateDto
+    -> 200:  content=['application/json']
+- DELETE /memories/{id}/assets | Remove assets from a memory | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+- PUT /memories/{id}/assets | Add assets to a memory | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+
+### Notifications (6 ops)
+- DELETE /notifications | Delete notifications | auth | state=Stable | perms=
+    body application/json: #/components/schemas/NotificationDeleteAllDto
+    -> 204:  content=[]
+- GET /notifications | Retrieve notifications | auth | state=Stable | perms=
+    param query: id (string) req=False :: Filter by notification ID
+    param query: level (?) req=False :: 
+    param query: type (?) req=False :: 
+    param query: unread (boolean) req=False :: Filter by unread status
+    -> 200:  content=['application/json']
+- PUT /notifications | Update notifications | auth | state=Stable | perms=
+    body application/json: #/components/schemas/NotificationUpdateAllDto
+    -> 204:  content=[]
+- DELETE /notifications/{id} | Delete a notification | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /notifications/{id} | Get a notification | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /notifications/{id} | Update a notification | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/NotificationUpdateDto
+    -> 200:  content=['application/json']
+
+### Notifications (admin) (3 ops)
+- POST /admin/notifications | Create a notification | auth | state=Stable | perms=
+    body application/json: #/components/schemas/NotificationCreateDto
+    -> 201:  content=['application/json']
+- POST /admin/notifications/templates/{name} | Render email template | auth | state=Stable | perms=
+    param path: name (string) req=True :: 
+    body application/json: #/components/schemas/TemplateDto
+    -> 200:  content=['application/json']
+- POST /admin/notifications/test-email | Send test email | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AdminConfigSmtpDto
+    -> 200:  content=['application/json']
+
+### Partners (5 ops)
+- GET /partners | Retrieve partners | auth | state=Stable | perms=
+    param query: direction (?) req=True :: 
+    -> 200:  content=['application/json']
+- POST /partners | Create a partner | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PartnerCreateDto
+    -> 201:  content=['application/json']
+- DELETE /partners/{id} | Remove a partner | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- POST /partners/{id} [DEPRECATED] | Create a partner | auth | state=Deprecated | perms=
+    param path: id (string) req=True :: 
+    -> 201:  content=['application/json']
+- PUT /partners/{id} | Update a partner | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/PartnerUpdateDto
+    -> 200:  content=['application/json']
+
+### Passkeys (8 ops)
+- GET /passkeys | Search passkeys | auth | state=Alpha | perms=
+    param query: id (string) req=False :: Filter by passkey ID
+    -> 200:  content=['application/json']
+- POST /passkeys/authentication/finish | Finish passkey authentication | auth(default) | state=Alpha | perms=
+    body application/json: #/components/schemas/PasskeyAuthenticationFinishDto
+    -> 201:  content=['application/json']
+- POST /passkeys/authentication/start | Start passkey authentication | auth(default) | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- POST /passkeys/registration/finish | Finish passkey registration | auth | state=Alpha | perms=
+    body application/json: #/components/schemas/PasskeyRegistrationFinishDto
+    -> 201:  content=['application/json']
+- POST /passkeys/registration/start | Start passkey registration | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- DELETE /passkeys/{id} | Delete a passkey | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /passkeys/{id} | Retrieve a passkey | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PATCH /passkeys/{id} | Update a passkey | auth | state=Alpha | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/PasskeyUpdateDto
+    -> 200:  content=['application/json']
+
+### People (15 ops)
+- DELETE /people | Delete people | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PeopleDeleteDto
+    -> 204:  content=[]
+- GET /people | Get all people | auth | state=Stable | perms=
+    param query: closestAssetId (string) req=False :: Closest asset ID for similarity search
+    param query: closestPersonId (string) req=False :: Closest person ID for similarity search
+    param query: isFavorite (boolean) req=False :: Filter by favorite status
+    param query: isHidden (boolean) req=False :: Filter by hidden status
+    param query: name (string) req=False :: Filter by person name
+    param query: page (integer) req=False :: Page number for pagination
+    param query: sharedById (string) req=False :: Only include people to which the user gave access
+    param query: sharedWithId (string) req=False :: Only include people to which the user was given access
+    param query: size (integer) req=False :: Number of items per page
+    param query: withHidden (boolean) req=False :: Include hidden people
+    -> 200:  content=['application/json']
+- POST /people | Create a person | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PersonCreateDto
+    -> 201:  content=['application/json']
+- PUT /people | Update people | auth | state=Stable | perms=
+    body application/json: #/components/schemas/PeopleUpdateDto
+    -> 200:  content=['application/json']
+- POST /people/merge | Merge people | auth | state=Stable | perms=
+    body application/json: #/components/schemas/MergePersonDto
+    -> 200:  content=['application/json']
+- DELETE /people/users | Remove users from people | auth | state=Beta | perms=
+    body application/json: #/components/schemas/PersonUsersDeleteDto
+    -> 200:  content=[]
+- GET /people/users | Get people access | auth | state=Beta | perms=
+    param query: direction (?) req=False :: 
+    param query: personId (string) req=False :: Person ID
+    param query: role (?) req=False :: Role of user
+    param query: sharedById (string) req=False :: User ID of the user that gave access
+    param query: sharedWithId (string) req=False :: User ID of the user that was given access
+    -> 200:  content=['application/json']
+- PUT /people/users | Upsert user access | auth | state=Beta | perms=
+    body application/json: #/components/schemas/PeopleUsersUpsertDto
+    -> 200:  content=[]
+- DELETE /people/{id} | Delete person | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/PersonDeleteDto
+    -> 204:  content=[]
+- GET /people/{id} | Get a person | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /people/{id} | Update person | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/PersonUpdateDto
+    -> 200:  content=['application/json']
+- POST /people/{id}/merge [DEPRECATED] | Merge people | auth | state=Deprecated | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/MergePersonDto
+    -> 200:  content=['application/json']
+- PUT /people/{id}/reassign | Reassign faces | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AssetFaceUpdateDto
+    -> 200:  content=['application/json']
+- GET /people/{id}/statistics | Get person statistics | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /people/{id}/thumbnail | Get person thumbnail | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/octet-stream']
+
+### Plugins (4 ops)
+- GET /plugins | List all plugins | auth | state= | perms=
+    param query: description (string) req=False :: 
+    param query: enabled (boolean) req=False :: Whether the plugin is enabled
+    param query: id (string) req=False :: Plugin ID
+    param query: name (string) req=False :: 
+    param query: title (string) req=False :: 
+    param query: version (string) req=False :: 
+    -> 200:  content=['application/json']
+- GET /plugins/methods | Retrieve plugin methods | auth | state= | perms=
+    param query: description (string) req=False :: 
+    param query: enabled (boolean) req=False :: Whether the plugin method is enabled
+    param query: id (string) req=False :: Plugin method ID
+    param query: name (string) req=False :: 
+    param query: pluginName (string) req=False :: Plugin name
+    param query: pluginVersion (string) req=False :: Plugin version
+    param query: title (string) req=False :: 
+    param query: trigger (?) req=False :: Workflow trigger
+    param query: type (?) req=False :: Workflow types
+    -> 200:  content=['application/json']
+- GET /plugins/templates | Retrieve workflow templates | auth | state= | perms=
+    -> 200:  content=['application/json']
+- GET /plugins/{id} | Retrieve a plugin | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+
+### Queues (5 ops)
+- GET /queues | List all queues | auth | state=Alpha | perms=
+    -> 200:  content=['application/json']
+- GET /queues/{name} | Retrieve a queue | auth | state=Alpha | perms=
+    param path: name (?) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /queues/{name} | Update a queue | auth | state=Alpha | perms=
+    param path: name (?) req=True :: 
+    body application/json: #/components/schemas/QueueUpdateDto
+    -> 200:  content=['application/json']
+- DELETE /queues/{name}/jobs | Empty a queue | auth | state=Alpha | perms=
+    param path: name (?) req=True :: 
+    body application/json: #/components/schemas/QueueDeleteDto
+    -> 204:  content=[]
+- GET /queues/{name}/jobs | Retrieve queue jobs | auth | state=Alpha | perms=
+    param path: name (?) req=True :: 
+    param query: status (array) req=False :: Filter jobs by status
+    -> 200:  content=['application/json']
+
+### Search (10 ops)
+- GET /search/cities | Retrieve assets by city | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /search/explore | Retrieve explore data | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /search/large-assets [DEPRECATED] | Search large assets | auth | state=Deprecated | perms=
+    param query: albumIds (array) req=False :: Filter by album IDs
+    param query: city (string) req=False :: Filter by city name
+    param query: country (string) req=False :: Filter by country name
+    param query: createdAfter (string) req=False :: Filter by creation date (after)
+    param query: createdBefore (string) req=False :: Filter by creation date (before)
+    param query: isEncoded (boolean) req=False :: Filter by encoded status
+    param query: isFavorite (boolean) req=False :: Filter by favorite status
+    param query: isMotion (boolean) req=False :: Filter by motion photo status
+    param query: isNotInAlbum (boolean) req=False :: Filter assets not in any album
+    param query: isOffline (boolean) req=False :: Filter by offline status
+    param query: lensModel (string) req=False :: Filter by lens model
+    param query: libraryId (string) req=False :: Library ID to filter by
+    param query: make (string) req=False :: Filter by camera make
+    param query: minFileSize (integer) req=False :: Minimum file size in bytes
+    param query: model (string) req=False :: Filter by camera model
+    param query: ocr (string) req=False :: Filter by OCR text content
+    param query: personIds (array) req=False :: Filter by person IDs
+    param query: rating (integer) req=False :: Filter by rating [1-5], or null for unrated
+    param query: size (integer) req=False :: Number of results to return
+    param query: state (string) req=False :: Filter by state/province name
+    param query: tagIds (array) req=False :: Filter by tag IDs
+    param query: takenAfter (string) req=False :: Filter by taken date (after)
+    param query: takenBefore (string) req=False :: Filter by taken date (before)
+    param query: trashedAfter (string) req=False :: Filter by trash date (after)
+    param query: trashedBefore (string) req=False :: Filter by trash date (before)
+    param query: type (?) req=False :: 
+    param query: updatedAfter (string) req=False :: Filter by update date (after)
+    param query: updatedBefore (string) req=False :: Filter by update date (before)
+    param query: visibility (?) req=False :: 
+    param query: withDeleted (boolean) req=False :: Include deleted assets
+    param query: withExif (boolean) req=False :: Include EXIF data in response
+    -> 200:  content=['application/json']
+- POST /search/metadata | Search assets by metadata | auth | state=Stable | perms=
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    body application/json: #/components/schemas/MetadataSearchDto
+    -> 200:  content=['application/json']
+- GET /search/person | Search people | auth | state=Stable | perms=
+    param query: name (string) req=True :: Person name to search for
+    param query: withHidden (boolean) req=False :: Include hidden people
+    -> 200:  content=['application/json']
+- GET /search/places | Search places | auth | state=Stable | perms=
+    param query: name (string) req=True :: Place name to search for
+    -> 200:  content=['application/json']
+- POST /search/random | Search random assets | auth | state=Stable | perms=
+    body application/json: #/components/schemas/RandomSearchDto
+    -> 200:  content=['application/json']
+- POST /search/smart | Smart asset search | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SmartSearchDto
+    -> 200:  content=['application/json']
+- POST /search/statistics | Search asset statistics | auth | state=Stable | perms=
+    body application/json: #/components/schemas/StatisticsSearchDto
+    -> 200:  content=['application/json']
+- GET /search/suggestions | Retrieve search suggestions | auth | state=Stable | perms=
+    param query: country (string) req=False :: Filter by country
+    param query: includeNull (boolean) req=False :: Include null values in suggestions
+    param query: lensModel (string) req=False :: Filter by lens model
+    param query: make (string) req=False :: Filter by camera make
+    param query: model (string) req=False :: Filter by camera model
+    param query: state (string) req=False :: Filter by state/province
+    param query: type (?) req=True :: 
+    -> 200:  content=['application/json']
+
+### Server (14 ops)
+- GET /server/about | Get server information | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/apk-links | Get APK links | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/config [DEPRECATED] | Get config | auth(default) | state=Deprecated | perms=
+    -> 200:  content=['application/json']
+- GET /server/features [DEPRECATED] | Get features | auth(default) | state=Deprecated | perms=
+    -> 200:  content=['application/json']
+- DELETE /server/license | Delete server product key | auth | state=Stable | perms=
+    -> 204:  content=[]
+- GET /server/license | Get product key | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+    -> 404:  content=[]
+- PUT /server/license | Set server product key | auth | state=Stable | perms=
+    body application/json: #/components/schemas/LicenseKeyDto
+    -> 200:  content=['application/json']
+- GET /server/media-types | Get supported media types | auth(default) | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/ping | Ping | auth(default) | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/statistics | Get statistics | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/storage | Get storage | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/version | Get server version | auth(default) | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/version-check | Get version check status | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /server/version-history | Get version history | auth(default) | state=Stable | perms=
+    -> 200:  content=['application/json']
+
+### Sessions (6 ops)
+- DELETE /sessions | Delete all sessions | auth | state=Stable | perms=
+    -> 204:  content=[]
+- GET /sessions | Retrieve sessions | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /sessions | Create a session | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SessionCreateDto
+    -> 201:  content=['application/json']
+- DELETE /sessions/{id} | Delete a session | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- PUT /sessions/{id} | Update a session | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/SessionUpdateDto
+    -> 200:  content=['application/json']
+- POST /sessions/{id}/lock | Lock a session | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+
+### Shared links (9 ops)
+- GET /shared-links | Retrieve all shared links | auth | state=Stable | perms=
+    param query: albumId (string) req=False :: Filter by album ID
+    param query: id (string) req=False :: Filter by shared link ID
+    -> 200:  content=['application/json']
+- POST /shared-links | Create a shared link | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SharedLinkCreateDto
+    -> 201:  content=['application/json']
+- POST /shared-links/login | Shared link login | auth | state=Beta | perms=
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    body application/json: #/components/schemas/SharedLinkLoginDto
+    -> 201:  content=['application/json']
+- GET /shared-links/me | Retrieve current shared link | auth | state=Stable | perms=
+    param query: key (string) req=False :: 
+    param query: slug (string) req=False :: 
+    -> 200:  content=['application/json']
+- DELETE /shared-links/{id} | Delete a shared link | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /shared-links/{id} | Retrieve a shared link | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PATCH /shared-links/{id} | Update a shared link | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/SharedLinkEditDto
+    -> 200:  content=['application/json']
+- DELETE /shared-links/{id}/assets | Remove assets from a shared link | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AssetIdsDto
+    -> 200:  content=['application/json']
+- PUT /shared-links/{id}/assets | Add assets to a shared link | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/AssetIdsDto
+    -> 200:  content=['application/json']
+
+### Stacks (7 ops)
+- DELETE /stacks | Delete stacks | auth | state=Stable | perms=
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 204:  content=[]
+- GET /stacks | Retrieve stacks | auth | state=Stable | perms=
+    param query: primaryAssetId (string) req=False :: Filter by primary asset ID
+    -> 200:  content=['application/json']
+- POST /stacks | Create a stack | auth | state=Stable | perms=
+    body application/json: #/components/schemas/StackCreateDto
+    -> 201:  content=['application/json']
+- DELETE /stacks/{id} | Delete a stack | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /stacks/{id} | Retrieve a stack | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /stacks/{id} | Update a stack | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/StackUpdateDto
+    -> 200:  content=['application/json']
+- DELETE /stacks/{id}/assets/{assetId} | Remove an asset from a stack | auth | state=Stable | perms=
+    param path: assetId (string) req=True :: 
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+
+### Sync (4 ops)
+- DELETE /sync/ack | Delete acknowledgements | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SyncAckDeleteDto
+    -> 204:  content=[]
+- GET /sync/ack | Retrieve acknowledgements | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /sync/ack | Acknowledge changes | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SyncAckSetDto
+    -> 204:  content=[]
+- POST /sync/stream | Stream sync changes | auth | state=Stable | perms=
+    body application/json: #/components/schemas/SyncStreamDto
+    -> 200:  content=[]
+
+### System config (4 ops)
+- GET /system-config [DEPRECATED] | Get system configuration | auth | state=Deprecated | perms=
+    -> 200:  content=['application/json']
+- PUT /system-config [DEPRECATED] | Update system configuration | auth | state=Deprecated | perms=
+    body application/json: #/components/schemas/AdminConfigDto
+    -> 200:  content=['application/json']
+- GET /system-config/defaults [DEPRECATED] | Get system configuration defaults | auth | state=Deprecated | perms=
+    -> 200:  content=['application/json']
+- GET /system-config/storage-template-options | Get storage template options | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+
+### System metadata (4 ops)
+- GET /system-metadata/admin-onboarding | Retrieve admin onboarding | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /system-metadata/admin-onboarding | Update admin onboarding | auth | state=Stable | perms=
+    body application/json: #/components/schemas/AdminOnboardingUpdateDto
+    -> 204:  content=[]
+- GET /system-metadata/reverse-geocoding-state | Retrieve reverse geocoding state | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /system-metadata/version-check-state | Retrieve version check state | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+
+### Tags (9 ops)
+- GET /tags | Retrieve tags | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /tags | Create a tag | auth | state=Stable | perms=
+    body application/json: #/components/schemas/TagCreateDto
+    -> 201:  content=['application/json']
+- PUT /tags | Upsert tags | auth | state=Stable | perms=
+    body application/json: #/components/schemas/TagUpsertDto
+    -> 200:  content=['application/json']
+- PUT /tags/assets | Tag assets | auth | state=Stable | perms=
+    body application/json: #/components/schemas/TagBulkAssetsDto
+    -> 200:  content=['application/json']
+- DELETE /tags/{id} | Delete a tag | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /tags/{id} | Retrieve a tag | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /tags/{id} | Update a tag | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/TagUpdateDto
+    -> 200:  content=['application/json']
+- DELETE /tags/{id}/assets | Untag assets | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+- PUT /tags/{id}/assets | Tag assets | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+
+### Timeline (2 ops)
+- GET /timeline/bucket | Get time bucket | auth | state=Internal | perms=
+    param query: albumId (string) req=False :: Filter assets belonging to a specific album
+    param query: bbox (string) req=False :: Bounding box coordinates as west,south,east,north (WGS84)
+    param query: isFavorite (boolean) req=False :: Filter by favorite status (true for favorites only, false for non-favorites only)
+    param query: isTrashed (boolean) req=False :: Filter by trash status (true for trashed assets only, false for non-trashed only)
+    param query: key (string) req=False :: 
+    param query: order (?) req=False :: Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)
+    param query: orderBy (?) req=False :: Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)
+    param query: personId (string) req=False :: Filter assets containing a specific person (face recognition)
+    param query: slug (string) req=False :: 
+    param query: tagId (string) req=False :: Filter assets with a specific tag
+    param query: timeBucket (string) req=True :: Time bucket identifier in YYYY-MM-DDT00:00:00.000Z format
+    param query: userId (string) req=False :: Filter assets by specific user ID
+    param query: visibility (?) req=False :: Filter by asset visibility status (ARCHIVE, TIMELINE, HIDDEN, LOCKED)
+    param query: withCoordinates (boolean) req=False :: Include location data in the response
+    param query: withPartners (boolean) req=False :: Include assets shared by partners
+    param query: withStacked (boolean) req=False :: Include stacked assets in the response. When true, only primary assets from stacks are returned.
+    -> 200:  content=['application/json']
+- GET /timeline/buckets | Get time buckets | auth | state=Internal | perms=
+    param query: albumId (string) req=False :: Filter assets belonging to a specific album
+    param query: bbox (string) req=False :: Bounding box coordinates as west,south,east,north (WGS84)
+    param query: isFavorite (boolean) req=False :: Filter by favorite status (true for favorites only, false for non-favorites only)
+    param query: isTrashed (boolean) req=False :: Filter by trash status (true for trashed assets only, false for non-trashed only)
+    param query: key (string) req=False :: 
+    param query: order (?) req=False :: Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)
+    param query: orderBy (?) req=False :: Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)
+    param query: personId (string) req=False :: Filter assets containing a specific person (face recognition)
+    param query: slug (string) req=False :: 
+    param query: tagId (string) req=False :: Filter assets with a specific tag
+    param query: userId (string) req=False :: Filter assets by specific user ID
+    param query: visibility (?) req=False :: Filter by asset visibility status (ARCHIVE, TIMELINE, HIDDEN, LOCKED)
+    param query: withCoordinates (boolean) req=False :: Include location data in the response
+    param query: withPartners (boolean) req=False :: Include assets shared by partners
+    param query: withStacked (boolean) req=False :: Include stacked assets in the response. When true, only primary assets from stacks are returned.
+    -> 200:  content=['application/json']
+
+### Trash (3 ops)
+- POST /trash/empty | Empty trash | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /trash/restore | Restore trash | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- POST /trash/restore/assets | Restore assets | auth | state=Stable | perms=
+    body application/json: #/components/schemas/BulkIdsDto
+    -> 200:  content=['application/json']
+
+### Users (16 ops)
+- GET /users | Get all users | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- GET /users/me | Get current user | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- PUT /users/me | Update current user | auth | state=Stable | perms=
+    body application/json: #/components/schemas/UserUpdateMeDto
+    -> 200:  content=['application/json']
+- GET /users/me/calendar-heatmap | Retrieve calendar heatmap activity | auth | state=Stable | perms=
+    param query: from (string) req=False :: Start date in UTC
+    param query: to (string) req=False :: End date in UTC
+    param query: type (?) req=False :: 
+    -> 200:  content=['application/json']
+- DELETE /users/me/license | Delete user product key | auth | state=Stable | perms=
+    -> 204:  content=[]
+- GET /users/me/license | Retrieve user product key | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- PUT /users/me/license | Set user product key | auth | state=Stable | perms=
+    body application/json: #/components/schemas/LicenseKeyDto
+    -> 200:  content=['application/json']
+- DELETE /users/me/onboarding | Delete user onboarding | auth | state=Stable | perms=
+    -> 204:  content=[]
+- GET /users/me/onboarding | Retrieve user onboarding | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- PUT /users/me/onboarding | Update user onboarding | auth | state=Stable | perms=
+    body application/json: #/components/schemas/OnboardingDto
+    -> 200:  content=['application/json']
+- GET /users/me/preferences | Get my preferences | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+- PUT /users/me/preferences | Update my preferences | auth | state=Stable | perms=
+    body application/json: #/components/schemas/UserPreferencesUpdateDto
+    -> 200:  content=['application/json']
+- DELETE /users/profile-image | Delete user profile image | auth | state=Stable | perms=
+    -> 204:  content=[]
+- POST /users/profile-image | Create user profile image | auth | state=Stable | perms=
+    body multipart/form-data: #/components/schemas/CreateProfileImageDto
+    -> 201:  content=['application/json']
+- GET /users/{id} | Retrieve a user | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /users/{id}/profile-image | Retrieve user profile image | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/octet-stream']
+
+### Users (admin) (11 ops)
+- GET /admin/users | Search users | auth | state=Stable | perms=
+    param query: id (string) req=False :: User ID filter
+    param query: withDeleted (boolean) req=False :: Include deleted users
+    -> 200:  content=['application/json']
+- POST /admin/users | Create a user | auth | state=Stable | perms=
+    body application/json: #/components/schemas/UserAdminCreateDto
+    -> 201:  content=['application/json']
+- DELETE /admin/users/{id} | Delete a user | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/UserAdminDeleteDto
+    -> 200:  content=['application/json']
+- GET /admin/users/{id} | Retrieve a user | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /admin/users/{id} | Update a user | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/UserAdminUpdateDto
+    -> 200:  content=['application/json']
+- GET /admin/users/{id}/calendar-heatmap | Retrieve calendar heatmap activity | auth | state=Stable | perms=
+    param query: from (string) req=False :: Start date in UTC
+    param path: id (string) req=True :: 
+    param query: to (string) req=False :: End date in UTC
+    param query: type (?) req=False :: 
+    -> 200:  content=['application/json']
+- GET /admin/users/{id}/preferences | Retrieve user preferences | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /admin/users/{id}/preferences | Update user preferences | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/UserPreferencesUpdateDto
+    -> 200:  content=['application/json']
+- POST /admin/users/{id}/restore | Restore a deleted user | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /admin/users/{id}/sessions | Retrieve user sessions | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /admin/users/{id}/statistics | Retrieve user statistics | auth | state=Stable | perms=
+    param path: id (string) req=True :: 
+    param query: isFavorite (boolean) req=False :: Filter by favorite status
+    param query: isTrashed (boolean) req=False :: Filter by trash status
+    param query: visibility (?) req=False :: 
+    -> 200:  content=['application/json']
+
+### Views (2 ops)
+- GET /view/folder | Retrieve assets by original path | auth | state=Stable | perms=
+    param query: path (string) req=True :: 
+    -> 200:  content=['application/json']
+- GET /view/folder/unique-paths | Retrieve unique paths | auth | state=Stable | perms=
+    -> 200:  content=['application/json']
+
+### Workflows (8 ops)
+- GET /workflows | List all workflows | auth | state= | perms=
+    param query: description (string) req=False :: Workflow description
+    param query: enabled (boolean) req=False :: Workflow enabled
+    param query: id (string) req=False :: Workflow ID
+    param query: logging (boolean) req=False :: Workflow logs run results
+    param query: name (string) req=False :: Workflow name
+    param query: trigger (?) req=False :: Workflow trigger type
+    -> 200:  content=['application/json']
+- POST /workflows | Create a workflow | auth | state= | perms=
+    body application/json: #/components/schemas/WorkflowCreateDto
+    -> 201:  content=['application/json']
+- GET /workflows/triggers | List all workflow triggers | auth | state= | perms=
+    -> 200:  content=['application/json']
+- DELETE /workflows/{id} | Delete a workflow | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 204:  content=[]
+- GET /workflows/{id} | Retrieve a workflow | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+- PUT /workflows/{id} | Update a workflow | auth | state= | perms=
+    param path: id (string) req=True :: 
+    body application/json: #/components/schemas/WorkflowUpdateDto
+    -> 200:  content=['application/json']
+- GET /workflows/{id}/logs | Retrieve workflow logs | auth | state= | perms=
+    param query: before (string) req=False :: Filter by runs before a date/time
+    param path: id (string) req=True :: 
+    param query: limit (integer) req=False :: Maximum number of logs
+    param query: result (?) req=False :: Filter by run result
+    -> 200:  content=['application/json']
+- GET /workflows/{id}/share | Retrieve a workflow | auth | state= | perms=
+    param path: id (string) req=True :: 
+    -> 200:  content=['application/json']
+
+
+TOTAL OPS: 287
+TOTAL PATHS: 199
+DEPRECATED OPS: 10
+   GET /jobs
+   PUT /jobs/{name}
+   POST /partners/{id}
+   POST /people/{id}/merge
+   POST /search/large-assets
+   GET /server/config
+   GET /server/features
+   GET /system-config
+   PUT /system-config
+   GET /system-config/defaults
+NO-AUTH OPS: 0

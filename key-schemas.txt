@@ -1,0 +1,1970 @@
+
+===== AssetResponseDto =====
+{
+ "properties": {
+  "checksum": {
+   "description": "Base64 encoded SHA1 hash",
+   "type": "string"
+  },
+  "createdAt": {
+   "description": "The UTC timestamp when the asset was originally uploaded to Immich.",
+   "format": "date-time",
+   "type": "string"
+  },
+  "duplicateId": {
+   "description": "Duplicate group ID",
+   "format": "uuid",
+   "nullable": true,
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "duration": {
+   "description": "Video/gif duration in milliseconds (null for static images)",
+   "maximum": 2147483647,
+   "minimum": 0,
+   "nullable": true,
+   "type": "integer"
+  },
+  "exifInfo": {
+   "$ref": "#/components/schemas/ExifResponseDto"
+  },
+  "fileCreatedAt": {
+   "description": "The actual UTC timestamp when the file was created/captured, preserving timezone information. This is the authoritative timestamp for chronological sorting within timeline groups. Combined with timezone data, this can be used to determine the exact moment the photo was taken.",
+   "format": "date-time",
+   "type": "string"
+  },
+  "fileModifiedAt": {
+   "description": "The UTC timestamp when the file was last modified on the filesystem. This reflects the last time the physical file was changed, which may be different from when the photo was originally taken.",
+   "format": "date-time",
+   "type": "string"
+  },
+  "hasMetadata": {
+   "description": "Whether asset has metadata",
+   "type": "boolean"
+  },
+  "height": {
+   "description": "Asset height",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "nullable": true,
+   "type": "integer"
+  },
+  "id": {
+   "description": "Asset ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "isArchived": {
+   "description": "Is archived",
+   "type": "boolean"
+  },
+  "isEdited": {
+   "description": "Is edited",
+   "type": "boolean",
+   "x-immich-history": [
+    {
+     "version": "v2.5.0",
+     "state": "Added"
+    },
+    {
+     "version": "v2.5.0",
+     "state": "Beta"
+    }
+   ],
+   "x-immich-state": "Beta"
+  },
+  "isFavorite": {
+   "description": "Is favorite",
+   "type": "boolean"
+  },
+  "isOffline": {
+   "description": "Is offline",
+   "type": "boolean"
+  },
+  "isTrashed": {
+   "description": "Is trashed",
+   "type": "boolean"
+  },
+  "libraryId": {
+   "description": "Library ID",
+   "format": "uuid",
+   "nullable": true,
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v1",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "livePhotoVideoId": {
+   "description": "Live photo video ID",
+   "nullable": true,
+   "type": "string"
+  },
+  "localDateTime": {
+   "description": "The local date and time when the photo/video was taken, derived from EXIF metadata. This represents the photographer's local time regardless of timezone, stored as a timezone-agnostic timestamp. Used for timeline grouping by \"local\" days and months.",
+   "format": "date-time",
+   "type": "string"
+  },
+  "originalFileName": {
+   "description": "Original file name",
+   "type": "string"
+  },
+  "originalMimeType": {
+   "description": "Original MIME type",
+   "type": "string"
+  },
+  "originalPath": {
+   "description": "Original file path",
+   "
+
+--- AssetCreateDto: NOT IN SPEC ---
+
+--- SearchDto: NOT IN SPEC ---
+
+===== SmartSearchDto =====
+{
+ "properties": {
+  "albumIds": {
+   "deprecated": true,
+   "description": "Filter by album IDs",
+   "items": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   },
+   "type": "array",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "city": {
+   "deprecated": true,
+   "description": "Filter by city name",
+   "nullable": true,
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "country": {
+   "deprecated": true,
+   "description": "Filter by country name",
+   "nullable": true,
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "createdAfter": {
+   "deprecated": true,
+   "description": "Filter by creation date (after)",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "createdBefore": {
+   "deprecated": true,
+   "description": "Filter by creation date (before)",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "filter": {
+   "$ref": "#/components/schemas/SearchFilter",
+   "x-immich-history": [
+    {
+     "version": "v3.2.0",
+     "state": "Added"
+    }
+   ]
+  },
+  "isEncoded": {
+   "deprecated": true,
+   "description": "Filter by encoded status",
+   "type": "boolean",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "isFavorite": {
+   "deprecated": true,
+   "description": "Filter by favorite status",
+   "type": "boolean",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state":
+
+===== MetadataSearchDto =====
+{
+ "properties": {
+  "albumIds": {
+   "deprecated": true,
+   "description": "Filter by album IDs",
+   "items": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   },
+   "type": "array",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "checksum": {
+   "deprecated": true,
+   "description": "Filter by file checksum",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "city": {
+   "deprecated": true,
+   "description": "Filter by city name",
+   "nullable": true,
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "country": {
+   "deprecated": true,
+   "description": "Filter by country name",
+   "nullable": true,
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "createdAfter": {
+   "deprecated": true,
+   "description": "Filter by creation date (after)",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "createdBefore": {
+   "deprecated": true,
+   "description": "Filter by creation date (before)",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "cursor": {
+   "description": "Cursor for the next page of results",
+   "minLength": 1,
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v3.2.0",
+     "state": "Added"
+    }
+   ]
+  },
+  "description": {
+   "deprecated": true,
+   "description": "Filter by description text",
+   "type": "string",
+   "x-immich-histor
+
+--- TimeBucketResponseDto: NOT IN SPEC ---
+
+--- TimeBucketSize: NOT IN SPEC ---
+
+===== AssetStatsResponseDto =====
+{
+ "properties": {
+  "images": {
+   "description": "Number of images",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  },
+  "total": {
+   "description": "Total number of assets",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  },
+  "videos": {
+   "description": "Number of videos",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  }
+ },
+ "required": [
+  "images",
+  "total",
+  "videos"
+ ],
+ "type": "object"
+}
+
+--- AssetStatsDto: NOT IN SPEC ---
+
+===== UserResponseDto =====
+{
+ "properties": {
+  "avatarColor": {
+   "$ref": "#/components/schemas/UserAvatarColor"
+  },
+  "email": {
+   "description": "User email",
+   "format": "email",
+   "pattern": "^[\\p{L}\\p{M}\\p{N}.!#$%&'*+/=?^_`{|}~-]+@[\\p{L}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?(?:\\.[\\p{L}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?)*$",
+   "type": "string"
+  },
+  "id": {
+   "description": "User ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "name": {
+   "description": "User name",
+   "type": "string"
+  },
+  "profileChangedAt": {
+   "description": "Profile change date",
+   "format": "date-time",
+   "type": "string"
+  },
+  "profileImagePath": {
+   "description": "Profile image path",
+   "type": "string"
+  }
+ },
+ "required": [
+  "avatarColor",
+  "email",
+  "id",
+  "name",
+  "profileChangedAt",
+  "profileImagePath"
+ ],
+ "type": "object"
+}
+
+===== LoginCredentialDto =====
+{
+ "properties": {
+  "email": {
+   "description": "User email",
+   "example": "testuser@email.com",
+   "format": "email",
+   "pattern": "^[\\p{L}\\p{M}\\p{N}.!#$%&'*+/=?^_`{|}~-]+@[\\p{L}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?(?:\\.[\\p{L}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?)*$",
+   "type": "string"
+  },
+  "password": {
+   "description": "User password",
+   "example": "password",
+   "type": "string"
+  }
+ },
+ "required": [
+  "email",
+  "password"
+ ],
+ "type": "object"
+}
+
+===== LoginResponseDto =====
+{
+ "properties": {
+  "accessToken": {
+   "description": "Access token",
+   "type": "string"
+  },
+  "isAdmin": {
+   "description": "Is admin user",
+   "type": "boolean"
+  },
+  "isOnboarded": {
+   "description": "Is onboarded",
+   "type": "boolean"
+  },
+  "name": {
+   "description": "User name",
+   "type": "string"
+  },
+  "profileImagePath": {
+   "description": "Profile image path",
+   "type": "string"
+  },
+  "shouldChangePassword": {
+   "description": "Should change password",
+   "type": "boolean"
+  },
+  "userEmail": {
+   "description": "User email",
+   "format": "email",
+   "pattern": "^[\\p{L}\\p{M}\\p{N}.!#$%&'*+/=?^_`{|}~-]+@[\\p{L}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?(?:\\.[\\p{L}\\p{N}](?:[\\p{L}\\p{M}\\p{N}-]{0,61}[\\p{L}\\p{M}\\p{N}])?)*$",
+   "type": "string"
+  },
+  "userId": {
+   "description": "User ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  }
+ },
+ "required": [
+  "accessToken",
+  "isAdmin",
+  "isOnboarded",
+  "name",
+  "profileImagePath",
+  "shouldChangePassword",
+  "userEmail",
+  "userId"
+ ],
+ "type": "object"
+}
+
+===== ApiKeyCreateDto =====
+{
+ "properties": {
+  "name": {
+   "description": "API key name",
+   "type": "string"
+  },
+  "permissions": {
+   "description": "List of permissions",
+   "items": {
+    "$ref": "#/components/schemas/Permission"
+   },
+   "minItems": 1,
+   "type": "array"
+  }
+ },
+ "required": [
+  "permissions"
+ ],
+ "type": "object"
+}
+
+===== ApiKeyCreateResponseDto =====
+{
+ "properties": {
+  "apiKey": {
+   "$ref": "#/components/schemas/ApiKeyResponseDto",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v3.2.0",
+     "state": "Deprecated"
+    }
+   ],
+   "x-immich-state": "Deprecated"
+  },
+  "createdAt": {
+   "description": "Creation date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "id": {
+   "description": "API key ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "name": {
+   "description": "API key name",
+   "type": "string"
+  },
+  "permissions": {
+   "description": "List of permissions",
+   "items": {
+    "$ref": "#/components/schemas/Permission"
+   },
+   "type": "array"
+  },
+  "secret": {
+   "description": "API key secret (only shown once)",
+   "type": "string"
+  },
+  "updatedAt": {
+   "description": "Last update date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  }
+ },
+ "required": [
+  "apiKey",
+  "createdAt",
+  "id",
+  "name",
+  "permissions",
+  "secret",
+  "updatedAt"
+ ],
+ "type": "object"
+}
+
+===== ApiKeyResponseDto =====
+{
+ "properties": {
+  "createdAt": {
+   "description": "Creation date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "id": {
+   "description": "API key ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "name": {
+   "description": "API key name",
+   "type": "string"
+  },
+  "permissions": {
+   "description": "List of permissions",
+   "items": {
+    "$ref": "#/components/schemas/Permission"
+   },
+   "type": "array"
+  },
+  "updatedAt": {
+   "description": "Last update date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  }
+ },
+ "required": [
+  "createdAt",
+  "id",
+  "name",
+  "permissions",
+  "updatedAt"
+ ],
+ "type": "object"
+}
+
+===== DownloadResponseDto =====
+{
+ "properties": {
+  "archives": {
+   "description": "Archive information",
+   "items": {
+    "$ref": "#/components/schemas/DownloadArchiveInfo"
+   },
+   "type": "array"
+  },
+  "totalSize": {
+   "description": "Total size in bytes",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  }
+ },
+ "required": [
+  "archives",
+  "totalSize"
+ ],
+ "type": "object"
+}
+
+===== DownloadInfoDto =====
+{
+ "properties": {
+  "albumId": {
+   "description": "Album ID to download",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "archiveSize": {
+   "description": "Archive size limit in bytes",
+   "maximum": 9007199254740991,
+   "minimum": 1,
+   "type": "integer"
+  },
+  "assetIds": {
+   "description": "Asset IDs to download",
+   "items": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   },
+   "type": "array"
+  },
+  "userId": {
+   "description": "User ID to download assets from",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  }
+ },
+ "type": "object"
+}
+
+===== PersonResponseDto =====
+{
+ "properties": {
+  "birthDate": {
+   "description": "Person date of birth",
+   "format": "date",
+   "nullable": true,
+   "type": "string"
+  },
+  "color": {
+   "description": "Person color (hex)",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1.126.0",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    }
+   ],
+   "x-immich-state": "Stable"
+  },
+  "id": {
+   "description": "Person ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "isFavorite": {
+   "description": "Is favorite",
+   "type": "boolean",
+   "x-immich-history": [
+    {
+     "version": "v1.126.0",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    }
+   ],
+   "x-immich-state": "Stable"
+  },
+  "isHidden": {
+   "description": "Is hidden",
+   "type": "boolean"
+  },
+  "name": {
+   "description": "Person name",
+   "type": "string"
+  },
+  "otherPeople": {
+   "items": {
+    "$ref": "#/components/schemas/PersonOtherResponseDto"
+   },
+   "type": "array"
+  },
+  "sharedBy": {
+   "description": "Users that gave the current user access to this person",
+   "items": {
+    "$ref": "#/components/schemas/PeopleUserResponseDto"
+   },
+   "type": "array"
+  },
+  "sharedWith": {
+   "description": "Users the current user gave access to this person",
+   "items": {
+    "$ref": "#/components/schemas/PeopleUserResponseDto"
+   },
+   "type": "array"
+  },
+  "thumbnailPath": {
+   "description": "Thumbnail path",
+   "type": "string"
+  },
+  "updatedAt": {
+   "description": "Last update date",
+   "format": "date-time",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1.107.0",
+     "state": "Added"
+    },
+    {
+     "version": "v2",
+     "state": "Stable"
+    }
+   ],
+   "x-immich-state": "Stable"
+  }
+ },
+ "required": [
+  "birthDate",
+  "id",
+  "isHidden",
+  "name",
+  "otherPeople",
+  "sharedBy",
+  "sharedWith",
+  "thumbnailPath"
+ ],
+ "type": "object"
+}
+
+===== AlbumResponseDto =====
+{
+ "properties": {
+  "albumName": {
+   "description": "Album name",
+   "type": "string"
+  },
+  "albumThumbnailAssetId": {
+   "description": "Thumbnail asset ID",
+   "format": "uuid",
+   "nullable": true,
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "albumUsers": {
+   "description": "First entry is always the album owner. Second entry is the auth user, if it differs from the owner. The rest are ordered alphabetically.",
+   "items": {
+    "$ref": "#/components/schemas/AlbumUserResponseDto"
+   },
+   "minItems": 1,
+   "type": "array"
+  },
+  "assetCount": {
+   "description": "Number of assets",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "type": "integer"
+  },
+  "contributorCounts": {
+   "items": {
+    "$ref": "#/components/schemas/ContributorCountResponseDto"
+   },
+   "type": "array"
+  },
+  "createdAt": {
+   "description": "Creation date",
+   "format": "date-time",
+   "type": "string"
+  },
+  "description": {
+   "description": "Album description",
+   "type": "string",
+   "x-immich-history": [
+    {
+     "version": "v1",
+     "state": "Added"
+    },
+    {
+     "version": "v3",
+     "state": "Updated",
+     "description": "An empty string is returned instead of null for backwards compatibility; null will be returned in v4."
+    }
+   ]
+  },
+  "endDate": {
+   "description": "UTC representation of (local) end date (latest asset)",
+   "format": "date-time",
+   "type": "string"
+  },
+  "hasSharedLink": {
+   "description": "Has shared link",
+   "type": "boolean"
+  },
+  "id": {
+   "description": "Album ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "isActivityEnabled": {
+   "description": "Activity feed enabled",
+   "type": "boolean"
+  },
+  "lastModifiedAssetTimestamp": {
+   "description": "Last modified asset timestamp",
+   "format": "date-time",
+   "type": "string"
+  },
+  "order": {
+   "$ref": "#/components/schemas/AssetOrder"
+  },
+  "shared": {
+   "description": "Is shared album",
+   "type": "boolean"
+  },
+  "startDate": {
+   "description": "UTC representation of (local) start date (earliest asset)",
+   "format": "date-time",
+   "type": "string"
+  },
+  "updatedAt": {
+   "description": "Last update date",
+   "format": "date-time",
+   "type": "string"
+  }
+ },
+ "required": [
+  "albumName",
+  "albumThumbnailAssetId",
+  "albumUsers",
+  "assetCount",
+  "createdAt",
+  "description",
+  "hasSharedLink",
+  "id",
+  "isActivityEnabled",
+  "shared",
+  "updatedAt"
+ ],
+ "type": "object"
+}
+
+===== MemoryResponseDto =====
+{
+ "properties": {
+  "assets": {
+   "items": {
+    "$ref": "#/components/schemas/AssetResponseDto"
+   },
+   "type": "array"
+  },
+  "createdAt": {
+   "description": "Creation date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "data": {
+   "$ref": "#/components/schemas/MemoryDataDto"
+  },
+  "deletedAt": {
+   "description": "Deletion date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "hideAt": {
+   "description": "Date when memory should be hidden",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "id": {
+   "description": "Memory ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "isSaved": {
+   "description": "Is memory saved",
+   "type": "boolean"
+  },
+  "memoryAt": {
+   "description": "Memory date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "ownerId": {
+   "description": "Owner user ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "seenAt": {
+   "description": "Date when memory was seen",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "showAt": {
+   "description": "Date when memory should be shown",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-
+
+===== TagResponseDto =====
+{
+ "properties": {
+  "color": {
+   "description": "Tag color (hex)",
+   "type": "string"
+  },
+  "createdAt": {
+   "description": "Creation date",
+   "format": "date-time",
+   "type": "string"
+  },
+  "id": {
+   "description": "Tag ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "name": {
+   "description": "Tag name",
+   "type": "string"
+  },
+  "parentId": {
+   "description": "Parent tag ID",
+   "type": "string"
+  },
+  "updatedAt": {
+   "description": "Last update date",
+   "format": "date-time",
+   "type": "string"
+  },
+  "value": {
+   "description": "Tag value (full path)",
+   "type": "string"
+  }
+ },
+ "required": [
+  "createdAt",
+  "id",
+  "name",
+  "updatedAt",
+  "value"
+ ],
+ "type": "object"
+}
+
+===== TrashResponseDto =====
+{
+ "properties": {
+  "count": {
+   "description": "Number of items in trash",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  }
+ },
+ "required": [
+  "count"
+ ],
+ "type": "object"
+}
+
+===== ServerVersionResponseDto =====
+{
+ "properties": {
+  "featureLevel": {
+   "description": "Highest feature level supported by the server, which increments independently of the release version",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "type": "integer",
+   "x-immich-history": [
+    {
+     "version": "v4.0.0",
+     "state": "Added"
+    }
+   ]
+  },
+  "major": {
+   "description": "Major version number",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "type": "integer"
+  },
+  "minor": {
+   "description": "Minor version number",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "type": "integer"
+  },
+  "patch": {
+   "description": "Patch version number",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "type": "integer"
+  },
+  "prerelease": {
+   "description": "Pre-release version number",
+   "maximum": 9007199254740991,
+   "minimum": 0,
+   "nullable": true,
+   "type": "integer",
+   "x-immich-history": [
+    {
+     "version": "v3.0.0",
+     "state": "Added"
+    }
+   ]
+  }
+ },
+ "required": [
+  "featureLevel",
+  "major",
+  "minor",
+  "patch",
+  "prerelease"
+ ],
+ "type": "object"
+}
+
+===== ServerConfigDto =====
+{
+ "properties": {
+  "externalDomain": {
+   "description": "External domain URL",
+   "type": "string"
+  },
+  "isInitialized": {
+   "description": "Whether the server has been initialized",
+   "type": "boolean"
+  },
+  "isOnboarded": {
+   "description": "Whether the admin has completed onboarding",
+   "type": "boolean"
+  },
+  "loginPageMessage": {
+   "description": "Login page message",
+   "type": "string"
+  },
+  "maintenanceMode": {
+   "description": "Whether maintenance mode is active",
+   "type": "boolean"
+  },
+  "mapDarkStyleUrl": {
+   "description": "Map dark style URL",
+   "type": "string"
+  },
+  "mapLightStyleUrl": {
+   "description": "Map light style URL",
+   "type": "string"
+  },
+  "minFaces": {
+   "description": "People min faces server default",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  },
+  "oauthAccountManagementUrl": {
+   "default": "",
+   "description": "OAuth account management URL",
+   "type": "string"
+  },
+  "oauthButtonText": {
+   "description": "OAuth button text",
+   "type": "string"
+  },
+  "publicUsers": {
+   "description": "Whether public user registration is enabled",
+   "type": "boolean"
+  },
+  "trashDays": {
+   "description": "Number of days before trashed assets are permanently deleted",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  },
+  "userDeleteDelay": {
+   "description": "Delay in days before deleted users are permanently removed",
+   "maximum": 9007199254740991,
+   "minimum": -9007199254740991,
+   "type": "integer"
+  }
+ },
+ "required": [
+  "externalDomain",
+  "isInitialized",
+  "isOnboarded",
+  "loginPageMessage",
+  "maintenanceMode",
+  "mapDarkStyleUrl",
+  "mapLightStyleUrl",
+  "minFaces",
+  "oauthButtonText",
+  "publicUsers",
+  "trashDays",
+  "userDeleteDelay"
+ ],
+ "type": "object"
+}
+
+===== SessionResponseDto =====
+{
+ "properties": {
+  "appVersion": {
+   "description": "App version",
+   "nullable": true,
+   "type": "string"
+  },
+  "createdAt": {
+   "description": "Creation date",
+   "type": "string"
+  },
+  "current": {
+   "description": "Is current session",
+   "type": "boolean"
+  },
+  "deviceOS": {
+   "description": "Device OS",
+   "type": "string"
+  },
+  "deviceType": {
+   "description": "Device type",
+   "type": "string"
+  },
+  "expiresAt": {
+   "description": "Expiration date",
+   "type": "string"
+  },
+  "id": {
+   "description": "Session ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "isPendingSyncReset": {
+   "description": "Is pending sync reset",
+   "type": "boolean"
+  },
+  "updatedAt": {
+   "description": "Last update date",
+   "type": "string"
+  }
+ },
+ "required": [
+  "appVersion",
+  "createdAt",
+  "current",
+  "deviceOS",
+  "deviceType",
+  "id",
+  "isPendingSyncReset",
+  "updatedAt"
+ ],
+ "type": "object"
+}
+
+--- SyncRequestDto: NOT IN SPEC ---
+
+--- SyncResponseDto: NOT IN SPEC ---
+
+===== AssetOrder =====
+{
+ "description": "Asset sort order",
+ "enum": [
+  "asc",
+  "desc"
+ ],
+ "type": "string"
+}
+
+--- ThumbnailFormat: NOT IN SPEC ---
+
+===== AssetFileResponseDto =====
+{
+ "properties": {
+  "createdAt": {
+   "description": "Creation date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  },
+  "id": {
+   "description": "Asset file ID",
+   "format": "uuid",
+   "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+   "type": "string"
+  },
+  "isEdited": {
+   "description": "The file was generated from an edit",
+   "type": "boolean"
+  },
+  "isProgressive": {
+   "description": "The file is a progressively encoded JPEG",
+   "type": "boolean"
+  },
+  "isTransparent": {
+   "description": "The file is transparent",
+   "type": "boolean"
+  },
+  "path": {
+   "description": "File path",
+   "type": "string"
+  },
+  "type": {
+   "$ref": "#/components/schemas/AssetFileType"
+  },
+  "updatedAt": {
+   "description": "Update date",
+   "example": "2024-01-01T00:00:00.000Z",
+   "format": "date-time",
+   "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$",
+   "type": "string"
+  }
+ },
+ "required": [
+  "createdAt",
+  "id",
+  "isEdited",
+  "isProgressive",
+  "isTransparent",
+  "path",
+  "type",
+  "updatedAt"
+ ],
+ "type": "object"
+}
+
+===== POST /assets raw =====
+{
+ "description": "Uploads a new asset to the server.",
+ "operationId": "uploadAsset",
+ "parameters": [
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "x-immich-checksum",
+   "in": "header",
+   "description": "sha1 checksum that can be used for duplicate detection before the file is uploaded",
+   "required": false,
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "requestBody": {
+  "content": {
+   "multipart/form-data": {
+    "schema": {
+     "$ref": "#/components/schemas/AssetMediaCreateDto"
+    }
+   }
+  },
+  "description": "Asset Upload Information",
+  "required": true
+ },
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/AssetMediaResponseDto"
+     }
+    }
+   },
+   "description": "Asset is a duplicate"
+  },
+  "201": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/AssetMediaResponseDto"
+     }
+    }
+   },
+   "description": "Asset uploaded successfully"
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Upload asset",
+ "tags": [
+  "Assets"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.upload",
+ "x-immich-state": "Stable"
+}
+
+===== GET /assets/{id}/thumbnail raw =====
+{
+ "description": "Retrieve the thumbnail image for the specified asset. Viewing the fullsize thumbnail might redirect to downloadAsset, which requires a different permission.",
+ "operationId": "viewAsset",
+ "parameters": [
+  {
+   "name": "edited",
+   "required": false,
+   "in": "query",
+   "description": "Return edited asset if available",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "id",
+   "required": true,
+   "in": "path",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "size",
+   "required": false,
+   "in": "query",
+   "x-immich-history": [
+    {
+     "version": "v3",
+     "state": "Updated",
+     "description": "Specifying 'original' is deprecated. Use the original endpoint directly instead"
+    }
+   ],
+   "schema": {
+    "$ref": "#/components/schemas/AssetMediaSize"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "responses": {
+  "200": {
+   "content": {
+    "application/octet-stream": {
+     "schema": {
+      "format": "binary",
+      "type": "string"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "View asset thumbnail",
+ "tags": [
+  "Assets"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.view",
+ "x-immich-state": "Stable"
+}
+
+===== GET /assets/{id}/original raw =====
+{
+ "description": "Downloads the original file of the specified asset.",
+ "operationId": "downloadAsset",
+ "parameters": [
+  {
+   "name": "edited",
+   "required": false,
+   "in": "query",
+   "description": "Return edited asset if available",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "id",
+   "required": true,
+   "in": "path",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "responses": {
+  "200": {
+   "content": {
+    "application/octet-stream": {
+     "schema": {
+      "format": "binary",
+      "type": "string"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Download original asset",
+ "tags": [
+  "Assets"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.download",
+ "x-immich-state": "Stable"
+}
+
+===== POST /search/smart raw (params) =====
+{
+ "description": "Perform a smart search for assets by using machine learning vectors to determine relevance.",
+ "operationId": "searchSmart",
+ "parameters": [],
+ "requestBody": {
+  "content": {
+   "application/json": {
+    "schema": {
+     "$ref": "#/components/schemas/SmartSearchDto"
+    }
+   }
+  },
+  "required": true
+ },
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/SearchResponseDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Smart asset search",
+ "tags": [
+  "Search"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.read",
+ "x-immich-state": "Stable"
+}
+
+===== GET /timeline/buckets raw =====
+{
+ "description": "Retrieve a list of all minimal time buckets.",
+ "operationId": "getTimeBuckets",
+ "parameters": [
+  {
+   "name": "albumId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets belonging to a specific album",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "bbox",
+   "required": false,
+   "in": "query",
+   "description": "Bounding box coordinates as west,south,east,north (WGS84)",
+   "schema": {
+    "example": "11.075683,49.416711,11.117589,49.454875",
+    "type": "string"
+   }
+  },
+  {
+   "name": "isFavorite",
+   "required": false,
+   "in": "query",
+   "description": "Filter by favorite status (true for favorites only, false for non-favorites only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "isTrashed",
+   "required": false,
+   "in": "query",
+   "description": "Filter by trash status (true for trashed assets only, false for non-trashed only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "order",
+   "required": false,
+   "in": "query",
+   "description": "Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrder"
+   }
+  },
+  {
+   "name": "orderBy",
+   "required": false,
+   "in": "query",
+   "description": "Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrderBy"
+   }
+  },
+  {
+   "name": "personId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets containing a specific person (face recognition)",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "tagId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets with a specific tag",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "userId",
+   "required": false,
+   "in": "qu
+
+===== GET /timeline/bucket raw =====
+{
+ "description": "Retrieve a string of all asset ids in a given time bucket.",
+ "operationId": "getTimeBucket",
+ "parameters": [
+  {
+   "name": "albumId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets belonging to a specific album",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "bbox",
+   "required": false,
+   "in": "query",
+   "description": "Bounding box coordinates as west,south,east,north (WGS84)",
+   "schema": {
+    "example": "11.075683,49.416711,11.117589,49.454875",
+    "type": "string"
+   }
+  },
+  {
+   "name": "isFavorite",
+   "required": false,
+   "in": "query",
+   "description": "Filter by favorite status (true for favorites only, false for non-favorites only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "isTrashed",
+   "required": false,
+   "in": "query",
+   "description": "Filter by trash status (true for trashed assets only, false for non-trashed only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "order",
+   "required": false,
+   "in": "query",
+   "description": "Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrder"
+   }
+  },
+  {
+   "name": "orderBy",
+   "required": false,
+   "in": "query",
+   "description": "Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrderBy"
+   }
+  },
+  {
+   "name": "personId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets containing a specific person (face recognition)",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "tagId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets with a specific tag",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "timeBucket",
+   "required": tr
+
+===== sync paths =====
+/sync/ack ['delete', 'get', 'post']
+/sync/stream ['post']
+
+===== x-immich-history example (AssetResponseDto.fileCreatedAt) =====
+{
+ "description": "The actual UTC timestamp when the file was created/captured, preserving timezone information. This is the authoritative timestamp for chronological sorting within timeline groups. Combined with timezone data, this can be used to determine the exact moment the photo was taken.",
+ "format": "date-time",
+ "type": "string"
+}
+
+===== all schema names containing Upload/Chunk =====
+['AdminConfigDuplicateDetectionDto', 'AssetBulkUploadCheckDto', 'AssetBulkUploadCheckItem', 'AssetBulkUploadCheckResponseDto', 'AssetBulkUploadCheckResult', 'AssetUploadAction', 'DatabaseBackupUploadDto', 'DuplicateResolveDto', 'DuplicateResolveGroupDto', 'DuplicateResponseDto', 'UserConfigDuplicateDetectionDto']
+
+===== error-ish schemas =====
+['AssetIdErrorReason', 'BulkIdErrorReason', 'MirrorAxis', 'MirrorParameters']

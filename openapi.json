@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Immich - API Documentation</title>
+    <meta name="theme-color" content="currentColor" />
+    <meta name="description" content="Immich API Documentation" />
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Immich API" />
+    <meta property="og:description" content="Immich API Documentation" />
+    <meta property="og:image" content="/img/social-preview.png" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Immich API Documentation" />
+    <meta name="twitter:description" content="Documentation and examples for the Immich API" />
+    <meta name="twitter:image" content="/img/social-preview.png" />
+
+    <script type="562706174616d735eac89e91-text/javascript">
+      try {
+        const preference = JSON.parse(localStorage.getItem('immich-ui-theme'));
+        const prefersDark = globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (preference === 'light' || (preference !== 'dark' && !prefersDark)) {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        }
+      } catch {
+        // noop
+      }
+    </script>
+
+    <link href="/_app/immutable/entry/start.DlgGM04g.js" rel="modulepreload">
+		<link href="/_app/immutable/entry/payload.DSmR2FwN.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/DclECHGd.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/D50YP2Lr.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/BSGXJ7J7.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/CUcxHp8l.js" rel="modulepreload">
+		<link href="/_app/immutable/entry/app.D0W7lT8X.js" rel="modulepreload">
+		<link href="/_app/immutable/nodes/0.CTdSxXOb.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/XKyaHtl9.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/BvcSvhDs.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/i2h2j47Q.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/CZc7JwLA.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/B7JMNyEd.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/DSzIkuEo.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/BKveBhQg.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/DJWOJ_dg.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/BHIFmahJ.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/By-WYKVO.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/Dy7cxhFI.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/DZmVM8E5.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/CnXsXnXo.js" rel="modulepreload">
+		
+		<link href="/_app/immutable/assets/Stack.YUHiLdzw.css" rel="stylesheet">
+		<link href="/_app/immutable/assets/command-palette-manager.qIF5pDXW.css" rel="stylesheet">
+		<link href="/_app/immutable/assets/CodeBlock.IelpDWeu.css" rel="stylesheet">
+		<link href="/_app/immutable/assets/0.Cm2FlMZX.css" rel="stylesheet">
+  </head>
+  <body data-sveltekit-preload-data="hover" class="bg-light text-darks">
+    <div style="display: contents">
+			<script type="562706174616d735eac89e91-text/javascript">
+				{
+					__sveltekit_1opgk28 = {
+						base: "",
+						version: "1795203142832"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					import("/_app/immutable/entry/start.DlgGM04g.js").then(async (kit) => {
+						kit.init(__sveltekit_1opgk28);
+						const app = await import("/_app/immutable/entry/app.D0W7lT8X.js");
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+  <!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e3aa783fa7e44ed9bd3303f4dac4a091"}' type="562706174616d735eac89e91-text/javascript"></script><!-- Cloudflare Pages Analytics --><script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="562706174616d735eac89e91-|49" defer></script></body>
+</html>

@@ -1,0 +1,71 @@
+import type { TimelineAsset } from '#lib/managers/timeline-manager/types.ts';
+import { BaseEventManager } from '#lib/utils/base-event-manager.svelte.ts';
+import type {
+  AlbumResponseDto,
+  AlbumUserRole,
+  ApiKeyResponseDto,
+  AssetResponseDto,
+  LoginResponseDto,
+  PasskeyResponseDto,
+  ReleaseEventV1,
+  StackResponseDto,
+  UserAdminResponseDto,
+} from '@immich/sdk';
+
+export type Events = {
+  AppInit: [];
+  AppNavigate: [];
+
+  AuthLogin: [LoginResponseDto];
+  AuthLogout: [];
+  AuthUserLoaded: [UserAdminResponseDto];
+
+  LanguageChange: [{ name: string; code: string; rtl?: boolean }];
+
+  ApiKeyCreate: [ApiKeyResponseDto];
+  ApiKeyUpdate: [ApiKeyResponseDto];
+  ApiKeyDelete: [ApiKeyResponseDto];
+
+  PasskeyCreate: [PasskeyResponseDto];
+  PasskeyUpdate: [PasskeyResponseDto];
+  PasskeyDelete: [PasskeyResponseDto];
+
+  AssetUpdate: [AssetResponseDto];
+  AssetsArchive: [string[]];
+  AssetsUnarchive: [TimelineAsset[]];
+  AssetsUndoArchive: [TimelineAsset[]];
+  AssetsDelete: [string[]];
+  AssetEditsApplied: [string];
+  AssetsTag: [string[]];
+
+  AlbumAddAssets: [{ assetIds: string[]; albumIds: string[] }];
+  AlbumRemoveAssets: [{ assetIds: string[]; albumIds: string[] }];
+  AlbumCreate: [AlbumResponseDto];
+  AlbumUpdate: [AlbumResponseDto];
+  AlbumDelete: [AlbumResponseDto];
+  AlbumShare: [];
+  AlbumUserUpdate: [{ albumId: string; userId: string; role: AlbumUserRole }];
+  AlbumUserDelete: [{ albumId: string; userId: string }];
+
+  PersonThumbnailReady: [{ id: string }];
+  PersonAssetDelete: [{ id: string; assetId: string }];
+
+  BackupUpload: [{ progress: number; isComplete: boolean }];
+
+  StackCreate: [StackResponseDto];
+  /** Unstacked, with assets to handle */
+  StackDelete: [{ id: string; assets: AssetResponseDto[] }];
+  /** Contains the new stack. If any assets are removed, AssetUpdate events are emitted for each. */
+  StackUpdate: [StackResponseDto];
+
+  UserAdminDeleted: [{ id: string }];
+
+  SessionLocked: [];
+  SessionDelete: [];
+
+  ReleaseEvent: [ReleaseEventV1];
+
+  WebsocketConnect: [];
+};
+
+export const eventManager = new BaseEventManager<Events>();

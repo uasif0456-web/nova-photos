@@ -1,0 +1,1274 @@
+
+===== AssetMediaCreateDto =====
+desc: 
+  assetData: string Asset file data
+  duration: integer Duration in milliseconds (for videos)
+  fileCreatedAt: string File creation date
+  fileModifiedAt: string File modification date
+  filename: string Filename
+  isFavorite: boolean Mark as favorite
+  livePhotoVideoId: string Live photo video ID
+  metadata: array Asset metadata items
+  sidecarData: string Sidecar file data
+  visibility: #/components/schemas/AssetVisibility 
+  required: ['assetData', 'fileCreatedAt', 'fileModifiedAt']
+
+===== AssetMediaResponseDto =====
+desc: 
+  id: string Asset media ID
+  status: #/components/schemas/AssetMediaStatus 
+  required: ['id', 'status']
+
+===== AssetBulkUploadCheckDto =====
+desc: 
+  assets: array Assets to check
+  required: ['assets']
+
+===== AssetBulkUploadCheckResponseDto =====
+desc: 
+  results: array Upload check results
+  required: ['results']
+
+===== MetadataSearchDto =====
+desc: 
+  albumIds: array Filter by album IDs
+  checksum: string Filter by file checksum
+  city: string Filter by city name
+  country: string Filter by country name
+  createdAfter: string Filter by creation date (after)
+  createdBefore: string Filter by creation date (before)
+  cursor: string Cursor for the next page of results
+  description: string Filter by description text
+  encodedVideoPath: string Filter by encoded video file path
+  filter: #/components/schemas/SearchFilter 
+  id: string Filter by asset ID
+  isEncoded: boolean Filter by encoded status
+  isFavorite: boolean Filter by favorite status
+  isMotion: boolean Filter by motion photo status
+  isNotInAlbum: boolean Filter assets not in any album
+  isOffline: boolean Filter by offline status
+  lensModel: string Filter by lens model
+  libraryId: string Library ID to filter by
+  make: string Filter by camera make
+  model: string Filter by camera model
+  ocr: string Filter by OCR text content
+  order: #/components/schemas/AssetOrder Sort order
+  orderBy: #/components/schemas/SearchOrder 
+  originalFileName: string Filter by original file name
+  originalPath: string Filter by original file path
+  page: integer Page number
+  personIds: array Filter by person IDs
+  previewPath: string Filter by preview file path
+  rating: integer Filter by rating [1-5], or null for unrated
+  size: integer Number of results to return
+  state: string Filter by state/province name
+  tagIds: array Filter by tag IDs
+  takenAfter: string Filter by taken date (after)
+  takenBefore: string Filter by taken date (before)
+  thumbnailPath: string Filter by thumbnail file path
+  trashedAfter: string Filter by trash date (after)
+  trashedBefore: string Filter by trash date (before)
+  type: #/components/schemas/AssetTypeEnum 
+  updatedAfter: string Filter by update date (after)
+  updatedBefore: string Filter by update date (before)
+  visibility: #/components/schemas/AssetVisibility 
+  withDeleted: boolean Include deleted assets
+  withExif: boolean Include EXIF data in response
+  withPeople: boolean Include people data in response
+  withStacked: boolean Include stacked assets
+  required: None
+
+===== SmartSearchDto =====
+desc: 
+  albumIds: array Filter by album IDs
+  city: string Filter by city name
+  country: string Filter by country name
+  createdAfter: string Filter by creation date (after)
+  createdBefore: string Filter by creation date (before)
+  filter: #/components/schemas/SearchFilter 
+  isEncoded: boolean Filter by encoded status
+  isFavorite: boolean Filter by favorite status
+  isMotion: boolean Filter by motion photo status
+  isNotInAlbum: boolean Filter assets not in any album
+  isOffline: boolean Filter by offline status
+  language: string Search language code
+  lensModel: string Filter by lens model
+  libraryId: string Library ID to filter by
+  make: string Filter by camera make
+  model: string Filter by camera model
+  ocr: string Filter by OCR text content
+  page: integer Page number
+  personIds: array Filter by person IDs
+  query: string Natural language search query
+  queryAssetId: string Asset ID to use as search reference
+  rating: integer Filter by rating [1-5], or null for unrated
+  size: integer Number of results to return
+  state: string Filter by state/province name
+  tagIds: array Filter by tag IDs
+  takenAfter: string Filter by taken date (after)
+  takenBefore: string Filter by taken date (before)
+  trashedAfter: string Filter by trash date (after)
+  trashedBefore: string Filter by trash date (before)
+  type: #/components/schemas/AssetTypeEnum 
+  updatedAfter: string Filter by update date (after)
+  updatedBefore: string Filter by update date (before)
+  visibility: #/components/schemas/AssetVisibility 
+  withDeleted: boolean Include deleted assets
+  withExif: boolean Include EXIF data in response
+  required: None
+
+===== SearchAssetResponseDto =====
+desc: 
+  count: integer Number of assets in this page
+  facets: array 
+  items: array 
+  nextCursor: string Cursor for the next page of results
+  nextPage: string Next page token
+  total: integer Total number of matching assets
+  required: ['count', 'facets', 'items', 'nextCursor', 'nextPage', 'total']
+
+===== ServerVersionResponseDto =====
+desc: 
+  featureLevel: integer Highest feature level supported by the server, which increments independently of the relea
+  major: integer Major version number
+  minor: integer Minor version number
+  patch: integer Patch version number
+  prerelease: integer Pre-release version number
+  required: ['featureLevel', 'major', 'minor', 'patch', 'prerelease']
+
+--- ServerFeaturesResponseDto: NOT IN SPEC ---
+
+===== ServerAboutResponseDto =====
+desc: 
+  build: string Build identifier
+  buildImage: string Build image name
+  buildImageUrl: string Build image URL
+  buildUrl: string Build URL
+  exiftool: string ExifTool version
+  ffmpeg: string FFmpeg version
+  imagemagick: string ImageMagick version
+  libvips: string libvips version
+  licensed: boolean Whether the server is licensed
+  nodejs: string Node.js version
+  repository: string Repository name
+  repositoryUrl: string Repository URL
+  sourceCommit: string Source commit hash
+  sourceRef: string Source reference (branch/tag)
+  sourceUrl: string Source URL
+  thirdPartyBugFeatureUrl: string Third-party bug/feature URL
+  thirdPartyDocumentationUrl: string Third-party documentation URL
+  thirdPartySourceUrl: string Third-party source URL
+  thirdPartySupportUrl: string Third-party support URL
+  version: string Server version
+  versionUrl: string URL to version information
+  required: ['licensed', 'version', 'versionUrl']
+
+===== AssetStatsResponseDto =====
+desc: 
+  images: integer Number of images
+  total: integer Total number of assets
+  videos: integer Number of videos
+  required: ['images', 'total', 'videos']
+
+===== LoginCredentialDto =====
+desc: 
+  email: string User email
+  password: string User password
+  required: ['email', 'password']
+
+===== LoginResponseDto =====
+desc: 
+  accessToken: string Access token
+  isAdmin: boolean Is admin user
+  isOnboarded: boolean Is onboarded
+  name: string User name
+  profileImagePath: string Profile image path
+  shouldChangePassword: boolean Should change password
+  userEmail: string User email
+  userId: string User ID
+  required: ['accessToken', 'isAdmin', 'isOnboarded', 'name', 'profileImagePath', 'shouldChangePassword', 'userEmail', 'userId']
+
+===== ApiKeyCreateDto =====
+desc: 
+  name: string API key name
+  permissions: array List of permissions
+  required: ['permissions']
+
+===== ApiKeyCreateResponseDto =====
+desc: 
+  apiKey: #/components/schemas/ApiKeyResponseDto 
+  createdAt: string Creation date
+  id: string API key ID
+  name: string API key name
+  permissions: array List of permissions
+  secret: string API key secret (only shown once)
+  updatedAt: string Last update date
+  required: ['apiKey', 'createdAt', 'id', 'name', 'permissions', 'secret', 'updatedAt']
+
+===== UpdateAssetDto =====
+desc: 
+  dateTimeOriginal: string Original date and time
+  description: string Asset description
+  isFavorite: boolean Mark as favorite
+  latitude: number Latitude coordinate
+  livePhotoVideoId: string Live photo video ID
+  longitude: number Longitude coordinate
+  rating: integer Rating in range [1-5] (starred), -1 (rejected), or null (unrated)
+  visibility: #/components/schemas/AssetVisibility 
+  required: None
+
+===== AssetBulkUpdateDto =====
+desc: 
+  dateTimeOriginal: string Original date and time
+  dateTimeRelative: integer Relative time offset in minutes
+  description: string Asset description
+  duplicateId: string Duplicate ID
+  ids: array Asset IDs to update
+  isFavorite: boolean Mark as favorite
+  latitude: number Latitude coordinate
+  longitude: number Longitude coordinate
+  rating: integer Rating in range [1-5] (starred), -1 (rejected), or null (unrated)
+  timeZone: string Time zone (IANA timezone)
+  visibility: #/components/schemas/AssetVisibility 
+  required: ['ids']
+
+--- TimeBucketDto: NOT IN SPEC ---
+
+===== thumbnail endpoint =====
+{
+ "description": "Retrieve the thumbnail image for the specified asset. Viewing the fullsize thumbnail might redirect to downloadAsset, which requires a different permission.",
+ "operationId": "viewAsset",
+ "parameters": [
+  {
+   "name": "edited",
+   "required": false,
+   "in": "query",
+   "description": "Return edited asset if available",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "id",
+   "required": true,
+   "in": "path",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "size",
+   "required": false,
+   "in": "query",
+   "x-immich-history": [
+    {
+     "version": "v3",
+     "state": "Updated",
+     "description": "Specifying 'original' is deprecated. Use the original endpoint directly instead"
+    }
+   ],
+   "schema": {
+    "$ref": "#/components/schemas/AssetMediaSize"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "responses": {
+  "200": {
+   "content": {
+    "application/octet-stream": {
+     "schema": {
+      "format": "binary",
+      "type": "string"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "View asset thumbnail",
+ "tags": [
+  "Assets"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.view",
+ "x-immich-state": "Stable"
+}
+
+===== timeline buckets =====
+{
+ "description": "Retrieve a list of all minimal time buckets.",
+ "operationId": "getTimeBuckets",
+ "parameters": [
+  {
+   "name": "albumId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets belonging to a specific album",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "bbox",
+   "required": false,
+   "in": "query",
+   "description": "Bounding box coordinates as west,south,east,north (WGS84)",
+   "schema": {
+    "example": "11.075683,49.416711,11.117589,49.454875",
+    "type": "string"
+   }
+  },
+  {
+   "name": "isFavorite",
+   "required": false,
+   "in": "query",
+   "description": "Filter by favorite status (true for favorites only, false for non-favorites only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "isTrashed",
+   "required": false,
+   "in": "query",
+   "description": "Filter by trash status (true for trashed assets only, false for non-trashed only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "order",
+   "required": false,
+   "in": "query",
+   "description": "Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrder"
+   }
+  },
+  {
+   "name": "orderBy",
+   "required": false,
+   "in": "query",
+   "description": "Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrderBy"
+   }
+  },
+  {
+   "name": "personId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets containing a specific person (face recognition)",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "tagId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets with a specific tag",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "userId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets by specific user ID",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "visibility",
+   "required": false,
+   "in": "query",
+   "description": "Filter by asset visibility status (ARCHIVE, TIMELINE, HIDDEN, LOCKED)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetVisibility"
+   }
+  },
+  {
+   "name": "withCoordinates",
+   "required": false,
+   "in": "query",
+   "description": "Include location data in the response",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "withPartners",
+   "required": false,
+   "in": "query",
+   "description": "Include assets shared by partners",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "withStacked",
+   "required": false,
+   "in": "query",
+   "description": "Include stacked assets in the response. When true, only primary assets from stacks are returned.",
+   "schema": {
+    "type": "boolean"
+   }
+  }
+ ],
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "items": {
+       "$ref": "#/components/schemas/TimeBucketsResponseDto"
+      },
+      "type": "array"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Get time buckets",
+ "tags": [
+  "Timeline"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Internal"
+  }
+ ],
+ "x-immich-permission": "asset.read",
+ "x-immich-state": "Internal"
+}
+{
+ "description": "Retrieve a string of all asset ids in a given time bucket.",
+ "operationId": "getTimeBucket",
+ "parameters": [
+  {
+   "name": "albumId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets belonging to a specific album",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "bbox",
+   "required": false,
+   "in": "query",
+   "description": "Bounding box coordinates as west,south,east,north (WGS84)",
+   "schema": {
+    "example": "11.075683,49.416711,11.117589,49.454875",
+    "type": "string"
+   }
+  },
+  {
+   "name": "isFavorite",
+   "required": false,
+   "in": "query",
+   "description": "Filter by favorite status (true for favorites only, false for non-favorites only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "isTrashed",
+   "required": false,
+   "in": "query",
+   "description": "Filter by trash status (true for trashed assets only, false for non-trashed only)",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "order",
+   "required": false,
+   "in": "query",
+   "description": "Sort order for assets within time buckets (ASC for oldest first, DESC for newest first)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrder"
+   }
+  },
+  {
+   "name": "orderBy",
+   "required": false,
+   "in": "query",
+   "description": "Date to group and order assets by (takenAt for date taken, createdAt for date added to Immich)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetOrderBy"
+   }
+  },
+  {
+   "name": "personId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets containing a specific person (face recognition)",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "tagId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets with a specific tag",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "timeBucket",
+   "required": true,
+   "in": "query",
+   "description": "Time bucket identifier in YYYY-MM-DDT00:00:00.000Z format",
+   "schema": {
+    "example": "2024-01-01T00:00:00.000Z",
+    "type": "string"
+   }
+  },
+  {
+   "name": "userId",
+   "required": false,
+   "in": "query",
+   "description": "Filter assets by specific user ID",
+   "schema": {
+    "format": "uuid",
+    "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+    "type": "string"
+   }
+  },
+  {
+   "name": "visibility",
+   "required": false,
+   "in": "query",
+   "description": "Filter by asset visibility status (ARCHIVE, TIMELINE, HIDDEN, LOCKED)",
+   "schema": {
+    "$ref": "#/components/schemas/AssetVisibility"
+   }
+  },
+  {
+   "name": "withCoordinates",
+   "required": false,
+   "in": "query",
+   "description": "Include location data in the response",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "withPartners",
+   "required": false,
+   "in": "query",
+   "description": "Include assets shared by partners",
+   "schema": {
+    "type": "boolean"
+   }
+  },
+  {
+   "name": "withStacked",
+   "required": false,
+   "in": "query",
+   "description": "Include stacked assets in the response. When true, only primary assets from stacks are returned.",
+   "schema": {
+    "type": "boolean"
+   }
+  }
+ ],
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/TimeBucketAssetResponseDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Get time bucket",
+ "tags": [
+  "Timeline"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Internal"
+  }
+ ],
+ "x-immich-permission": "asset.read",
+ "x-immich-state": "Internal"
+}
+
+===== sync/stream =====
+{
+ "description": "Retrieve a JSON lines streamed response of changes for synchronization. This endpoint is used by the mobile app to efficiently stay up to date with changes.",
+ "operationId": "getSyncStream",
+ "parameters": [],
+ "requestBody": {
+  "content": {
+   "application/json": {
+    "schema": {
+     "$ref": "#/components/schemas/SyncStreamDto"
+    }
+   }
+  },
+  "required": true
+ },
+ "responses": {
+  "200": {
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Stream sync changes",
+ "tags": [
+  "Sync"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "sync.stream",
+ "x-immich-state": "Stable"
+}
+
+===== sync/ack =====
+{
+ "delete": {
+  "description": "Delete specific synchronization acknowledgments.",
+  "operationId": "deleteSyncAck",
+  "parameters": [],
+  "requestBody": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/SyncAckDeleteDto"
+     }
+    }
+   },
+   "required": true
+  },
+  "responses": {
+   "204": {
+    "description": ""
+   }
+  },
+  "security": [
+   {
+    "bearer": []
+   },
+   {
+    "cookie": []
+   },
+   {
+    "api_key": []
+   }
+  ],
+  "summary": "Delete acknowledgements",
+  "tags": [
+   "Sync"
+  ],
+  "x-immich-history": [
+   {
+    "version": "v1",
+    "state": "Added"
+   },
+   {
+    "version": "v1",
+    "state": "Beta"
+   },
+   {
+    "version": "v2",
+    "state": "Stable"
+   }
+  ],
+  "x-immich-permission": "syncCheckpoint.delete",
+  "x-immich-state": "Stable"
+ },
+ "get": {
+  "description": "Retrieve the synchronization acknowledgments for the current session.",
+  "operationId": "getSyncAck",
+  "parameters": [],
+  "responses": {
+   "200": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "items": {
+        "$ref": "#/components/schemas/SyncAckDto"
+       },
+       "type": "array"
+      }
+     }
+    },
+    "description": ""
+   }
+  },
+  "security": [
+   {
+    "bearer": []
+   },
+   {
+    "cookie": []
+   },
+   {
+    "api_key": []
+   }
+  ],
+  "summary": "Retrieve acknowledgements",
+  "tags": [
+   "Sync"
+  ],
+  "x-immich-history": [
+   {
+    "version": "v1",
+    "state": "Added"
+   },
+   {
+    "version": "v1",
+    "state": "Beta"
+   },
+   {
+    "version": "v2",
+    "state": "Stable"
+   }
+  ],
+  "x-immich-permission": "syncCheckpoint.read",
+  "x-immich-state": "Stable"
+ },
+ "post": {
+  "description": "Send a list of synchronization acknowledgements to confirm that the latest changes have been received.",
+  "operationId": "sendSyncAck",
+  "parameters": [],
+  "requestBody": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/SyncAckSetDto"
+     }
+    }
+   },
+   "requir
+
+===== search/metadata =====
+{
+ "description": "Search for assets based on various metadata criteria.",
+ "operationId": "searchAssets",
+ "parameters": [
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "requestBody": {
+  "content": {
+   "application/json": {
+    "schema": {
+     "$ref": "#/components/schemas/MetadataSearchDto"
+    }
+   }
+  },
+  "required": true
+ },
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/SearchResponseDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Search assets by metadata",
+ "tags": [
+  "Search"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.read",
+ "x-immich-state": "Stable"
+}
+
+===== download/info + archive =====
+{
+ "description": "Retrieve information about how to request a download for the specified assets or album. The response includes groups of assets that can be downloaded together.",
+ "operationId": "getDownloadInfo",
+ "parameters": [
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "requestBody": {
+  "content": {
+   "application/json": {
+    "schema": {
+     "$ref": "#/components/schemas/DownloadInfoDto"
+    }
+   }
+  },
+  "required": true
+ },
+ "responses": {
+  "201": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/DownloadResponseDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Retrieve download information",
+ "tags": [
+  "Download"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.download",
+ "x-immich-state": "Stable"
+}
+{
+ "description": "Download a ZIP archive containing the specified assets. The assets must have been previously requested via the \"getDownloadInfo\" endpoint.",
+ "operationId": "downloadArchive",
+ "parameters": [
+  {
+   "name": "key",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  },
+  {
+   "name": "slug",
+   "required": false,
+   "in": "query",
+   "schema": {
+    "type": "string"
+   }
+  }
+ ],
+ "requestBody": {
+  "content": {
+   "application/json": {
+    "schema": {
+     "$ref": "#/components/schemas/DownloadArchiveDto"
+    }
+   }
+  },
+  "required": true
+ },
+ "responses": {
+  "200": {
+   "content": {
+    "application/octet-stream": {
+     "schema": {
+      "format": "binary",
+      "type": "string"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "security": [
+  {
+   "bearer": []
+  },
+  {
+   "cookie": []
+  },
+  {
+   "api_key": []
+  }
+ ],
+ "summary": "Download asset archive",
+ "tags": [
+  "Download"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-permission": "asset.download",
+ "x-immich-state": "Stable"
+}
+
+===== server/config + features responses =====
+{
+ "deprecated": true,
+ "description": "Retrieve the current server configuration.",
+ "operationId": "getServerConfig",
+ "parameters": [],
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/ServerConfigDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "summary": "Get config",
+ "tags": [
+  "Server",
+  "Deprecated"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  },
+  {
+   "version": "v3.2.0",
+   "state": "Deprecated",
+   "replacementId": "getPublicConfig"
+  }
+ ],
+ "x-immich-state": "Deprecated"
+}
+{
+ "deprecated": true,
+ "description": "Retrieve available features supported by this server.",
+ "operationId": "getServerFeatures",
+ "parameters": [],
+ "responses": {
+  "200": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/ServerFeaturesDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "summary": "Get features",
+ "tags": [
+  "Server",
+  "Deprecated"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  },
+  {
+   "version": "v3.2.0",
+   "state": "Deprecated",
+   "replacementId": "getPublicConfig"
+  }
+ ],
+ "x-immich-state": "Deprecated"
+}
+
+===== auth/login =====
+{
+ "description": "Login with username and password and receive a session token.",
+ "operationId": "login",
+ "parameters": [],
+ "requestBody": {
+  "content": {
+   "application/json": {
+    "schema": {
+     "$ref": "#/components/schemas/LoginCredentialDto"
+    }
+   }
+  },
+  "required": true
+ },
+ "responses": {
+  "201": {
+   "content": {
+    "application/json": {
+     "schema": {
+      "$ref": "#/components/schemas/LoginResponseDto"
+     }
+    }
+   },
+   "description": ""
+  }
+ },
+ "summary": "Login",
+ "tags": [
+  "Authentication"
+ ],
+ "x-immich-history": [
+  {
+   "version": "v1",
+   "state": "Added"
+  },
+  {
+   "version": "v1",
+   "state": "Beta"
+  },
+  {
+   "version": "v2",
+   "state": "Stable"
+  }
+ ],
+ "x-immich-state": "Stable"
+}
+
+===== x-immich-permission values sample (distinct) =====
+['activity.create', 'activity.delete', 'activity.read', 'activity.statistics', 'adminAuth.unlinkAll', 'adminConfig.read', 'adminConfig.update', 'adminSession.read', 'adminUser.create', 'adminUser.delete', 'adminUser.read', 'adminUser.update', 'album.create', 'album.delete', 'album.read', 'album.statistics', 'album.update', 'albumAsset.create', 'albumAsset.delete', 'albumUser.create', 'albumUser.delete', 'albumUser.update', 'apiKey.create', 'apiKey.delete', 'apiKey.read', 'apiKey.rotate', 'apiKey.update', 'asset.copy', 'asset.delete', 'asset.download', 'asset.edit.create', 'asset.edit.delete', 'asset.edit.get', 'asset.read', 'asset.statistics', 'asset.update', 'asset.upload', 'asset.view', 'assetFile.delete', 'assetFile.download', 'assetFile.read', 'auth.changePassword', 'backup.delete', 'backup.download', 'backup.upload', 'clusterGroup.admin', 'clusterGroup.leave', 'clusterGroup.read', 'clusterGroupRequest.create', 'clusterGroupRequest.delete', 'clusterGroupRequest.read', 'duplicate.delete', 'duplicate.read', 'face.create', 'face.delete', 'face.read', 'face.update', 'folder.read', 'job.create', 'job.read', 'library.create', 'library.delete', 'library.read', 'library.statistics', 'library.update', 'maintenance', 'map.read', 'map.search', 'memory.create', 'memory.delete', 'memory.read', 'memory.statistics', 'memory.update', 'memoryAsset.create', 'memoryAsset.delete', 'notification.create', 'notification.delete', 'notification.read', 'notification.update', 'partner.create', 'partner.delete', 'partner.read', 'partner.update', 'passkey.delete', 'passkey.read', 'passkey.update', 'person.create', 'person.delete', 'person.merge', 'person.read', 'person.reassign', 'person.statistics', 'person.update', 'pinCode.create', 'pinCode.delete', 'pinCode.update', 'plugin.read', 'queue.read', 'queue.update', 'queueJob.delete', 'queueJob.read', 'server.about', 'server.apkLinks', 'server.statistics', 'server.storage', 'server.versionCheck', 'serverLicense.delete', 'serverLicense.read', 'serverLicense.update', 'session.create', 'session.delete', 'session.lock', 'session.read', 'session.update', 'sharedLink.create', 'sharedLink.delete', 'sharedLink.read', 'sharedLink.update', 'stack.create', 'stack.delete', 'stack.read', 'stack.update', 'sync.stream', 'syncCheckpoint.delete', 'syncCheckpoint.read', 'syncCheckpoint.update', 'systemConfig.read', 'systemConfig.update', 'systemMetadata.read', 'systemMetadata.update', 'tag.asset', 'tag.create', 'tag.delete', 'tag.read', 'tag.update', 'user.read', 'user.update', 'userConfig.read', 'userLicense.delete', 'userLicense.read', 'userLicense.update', 'userOnboarding.delete', 'userOnboarding.read', 'userOnboarding.update', 'userPreference.read', 'userPreference.update', 'userProfileImage.delete', 'userProfileImage.read', 'userProfileImage.update', 'workflow.create', 'workflow.delete', 'workflow.logs', 'workflow.read', 'workflow.update']
+
+count distinct permissions: 154
+
+===== deprecated fields count =====
+deprecated schema fields: 125
+
+===== AssetResponseDto top-level props =====
+['checksum', 'createdAt', 'duplicateId', 'duration', 'exifInfo', 'fileCreatedAt', 'fileModifiedAt', 'hasMetadata', 'height', 'id', 'isArchived', 'isEdited', 'isFavorite', 'isOffline', 'isTrashed', 'libraryId', 'livePhotoVideoId', 'localDateTime', 'originalFileName', 'originalMimeType', 'originalPath', 'owner', 'ownerId', 'people', 'resized', 'stack', 'tags', 'thumbhash', 'type', 'updatedAt', 'visibility', 'width']
