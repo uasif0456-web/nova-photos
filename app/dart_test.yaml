@@ -1,0 +1,5 @@
+# Declares the `live` tag used by test/live_smoke_test.dart.
+# The live test also skips itself at runtime when DEMO_USER/DEMO_PASS
+# are absent, so a plain `flutter test` never touches the network.
+tags:
+  live:
